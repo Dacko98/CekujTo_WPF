@@ -13,8 +13,8 @@ namespace FilmDat.DAL.Entities
         public String Country { get; set; }
         public TimeSpan Duration { get; set; }
         public String Description { get; set; }
-        public ICollection<ReviewsEntity> Reviews { get; set; } = new List<ReviewsEntity>();
-        public ICollection<DirectedFilmsEntity> Directors { get; set; } = new List<DirectedFilmsEntity>();
-        public ICollection<ActedInFilmsEntity> Actors { get; set; } = new List<ActedInFilmsEntity>();
+        public ICollection<ReviewEntity> Reviews { get; set; } = new List<ReviewEntity>();
+        public ICollection<DirectedFilmEntity> Directors { get; set; } = new List<DirectedFilmEntity>();
+        public ICollection<ActedInFilmEntity> Actors { get; set; } = new List<ActedInFilmEntity>();
     }
 }
