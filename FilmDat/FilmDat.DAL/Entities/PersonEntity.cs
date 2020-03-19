@@ -8,7 +8,7 @@ namespace FilmDat.DAL.Entities
         public String FirstName { get; set; }
         public String LastName { get; set; }
         public DateTime BirthDate { get; set; }
-        public String Foto { get; set; }
+        public String FotoUrl { get; set; }
         public ICollection<DirectedFilmEntity> DirectedFilms { get; } = new List<DirectedFilmEntity>();
         public ICollection<ActedInFilmEntity> ActedInFilms { get;  } = new List<ActedInFilmEntity>();
 
@@ -20,12 +20,12 @@ namespace FilmDat.DAL.Entities
                 if (ReferenceEquals(x, null)) return false;
                 if (ReferenceEquals(y, null)) return false;
                 if (x.GetType() != y.GetType()) return false;
-                return x.ID == y.ID && x.FirstName == y.FirstName && x.LastName == y.LastName && x.BirthDate.Equals(y.BirthDate) && x.Foto == y.Foto && Equals(x.DirectedFilms, y.DirectedFilms) && Equals(x.ActedInFilms, y.ActedInFilms);
+                return x.ID == y.ID && x.FirstName == y.FirstName && x.LastName == y.LastName && x.BirthDate.Equals(y.BirthDate) && x.FotoUrl == y.FotoUrl && Equals(x.DirectedFilms, y.DirectedFilms) && Equals(x.ActedInFilms, y.ActedInFilms);
             }
 
             public int GetHashCode(PersonEntity obj)
             {
-                return HashCode.Combine(obj.FirstName, obj.LastName, obj.BirthDate, obj.Foto, obj.DirectedFilms, obj.ActedInFilms, obj.ID);
+                return HashCode.Combine(obj.FirstName, obj.LastName, obj.BirthDate, obj.FotoUrl, obj.DirectedFilms, obj.ActedInFilms, obj.ID);
             }
         }
 

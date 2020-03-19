@@ -27,7 +27,7 @@ namespace FilmDat.DAL.Tests
                 FirstName = "Ján",
                 LastName = "Mikulec",
                 BirthDate = new DateTime(1987,11,10),
-                Foto = "fotka.jpg",
+                FotoUrl = "fotka.jpg",
             };
            
             _filmDatDbContext.Persons.Add(personEntity);
@@ -40,7 +40,7 @@ namespace FilmDat.DAL.Tests
                Assert.Equal(personEntity.FirstName, fromDb.FirstName);
                Assert.Equal(personEntity.LastName, fromDb.LastName);
                Assert.Equal(personEntity.BirthDate, fromDb.BirthDate);
-               Assert.Equal(personEntity.Foto, fromDb.Foto);
+               Assert.Equal(personEntity.FotoUrl, fromDb.FotoUrl);
                 //ssert.Equal(personEntity, fromDb, PersonEntity.PersonEntityComparer);
             }
             
