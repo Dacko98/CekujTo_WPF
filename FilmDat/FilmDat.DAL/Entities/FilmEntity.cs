@@ -9,7 +9,7 @@ namespace FilmDat.DAL.Entities
         public String OriginalName { get; set; }
         public String CzechName { get; set; }
         public GenreEnum Genre { get; set; }
-        public String TitleFoto { get; set; }
+        public String TitleFotoUrl { get; set; }
         public String Country { get; set; }
         public TimeSpan Duration { get; set; }
         public String Description { get; set; }
