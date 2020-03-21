@@ -85,7 +85,7 @@ namespace FilmDat.DAL.Migrations
                     b.Property<string>("OriginalName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TitleFoto")
+                    b.Property<string>("TitleFotoUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
@@ -105,7 +105,7 @@ namespace FilmDat.DAL.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Foto")
+                    b.Property<string>("FotoUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")

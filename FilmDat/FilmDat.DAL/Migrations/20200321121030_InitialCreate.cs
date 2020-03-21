@@ -15,7 +15,7 @@ namespace FilmDat.DAL.Migrations
                     OriginalName = table.Column<string>(nullable: true),
                     CzechName = table.Column<string>(nullable: true),
                     Genre = table.Column<int>(nullable: false),
-                    TitleFoto = table.Column<string>(nullable: true),
+                    TitleFotoUrl = table.Column<string>(nullable: true),
                     Country = table.Column<string>(nullable: true),
                     Duration = table.Column<TimeSpan>(nullable: false),
                     Description = table.Column<string>(nullable: true)
@@ -33,7 +33,7 @@ namespace FilmDat.DAL.Migrations
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     BirthDate = table.Column<DateTime>(nullable: false),
-                    Foto = table.Column<string>(nullable: true)
+                    FotoUrl = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
