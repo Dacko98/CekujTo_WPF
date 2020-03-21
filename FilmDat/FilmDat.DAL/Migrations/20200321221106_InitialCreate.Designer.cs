@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FilmDat.DAL.Migrations
 {
     [DbContext(typeof(FilmDatDbContext))]
-    [Migration("20200321121030_InitialCreate")]
+    [Migration("20200321221106_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,9 +37,18 @@ namespace FilmDat.DAL.Migrations
 
                     b.HasIndex("ActorId");
 
-                    b.HasIndex("FilmId");
+                    b.HasIndex("FilmId", "ActorId")
+                        .IsUnique();
 
                     b.ToTable("ActedInFilmEntities");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = new Guid("501744f2-4fc1-494b-8b84-5fecb9f7903d"),
+                            ActorId = new Guid("e1e20085-1ce4-4612-be57-285b8c76d76a"),
+                            FilmId = new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c")
+                        });
                 });
 
             modelBuilder.Entity("FilmDat.DAL.Entities.DirectedFilmEntity", b =>
@@ -58,9 +67,18 @@ namespace FilmDat.DAL.Migrations
 
                     b.HasIndex("DirectorId");
 
-                    b.HasIndex("FilmId");
+                    b.HasIndex("FilmId", "DirectorId")
+                        .IsUnique();
 
                     b.ToTable("DirectedFilmEntities");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = new Guid("75cb065e-643a-4b6f-807f-b3add4cf0eca"),
+                            DirectorId = new Guid("6d372469-af50-4cfe-9582-8789bf598b2b"),
+                            FilmId = new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c")
+                        });
                 });
 
             modelBuilder.Entity("FilmDat.DAL.Entities.FilmEntity", b =>
@@ -93,6 +111,19 @@ namespace FilmDat.DAL.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Films");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c"),
+                            Country = "USA",
+                            CzechName = "Pomada",
+                            Description = "Romanticky muzikal",
+                            Duration = new TimeSpan(0, 2, 0, 0, 0),
+                            Genre = 7,
+                            OriginalName = "Grease",
+                            TitleFotoUrl = "pomada.jpg"
+                        });
                 });
 
             modelBuilder.Entity("FilmDat.DAL.Entities.PersonEntity", b =>
@@ -116,6 +147,24 @@ namespace FilmDat.DAL.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Persons");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = new Guid("e1e20085-1ce4-4612-be57-285b8c76d76a"),
+                            BirthDate = new DateTime(1972, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FirstName = "John",
+                            FotoUrl = "johntravolta.jpg",
+                            LastName = "Travolta"
+                        },
+                        new
+                        {
+                            ID = new Guid("6d372469-af50-4cfe-9582-8789bf598b2b"),
+                            BirthDate = new DateTime(1972, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FirstName = "Randal",
+                            FotoUrl = "randalklieser.jpg",
+                            LastName = "Kleiser"
+                        });
                 });
 
             modelBuilder.Entity("FilmDat.DAL.Entities.ReviewEntity", b =>
@@ -144,6 +193,17 @@ namespace FilmDat.DAL.Migrations
                     b.HasIndex("FilmId");
 
                     b.ToTable("Reviews");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = new Guid("585b8ad0-aa06-49dd-94fd-8ab6c93f7e57"),
+                            Date = new DateTime(2013, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FilmId = new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c"),
+                            NickName = "Alan232",
+                            Rating = 82L,
+                            TextReview = "Skvely film plny tanca a zabavy"
+                        });
                 });
 
             modelBuilder.Entity("FilmDat.DAL.Entities.ActedInFilmEntity", b =>

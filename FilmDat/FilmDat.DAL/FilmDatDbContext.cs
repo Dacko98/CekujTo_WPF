@@ -21,8 +21,18 @@ namespace FilmDat.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            PersonSeeds.Seed(modelBuilder);
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<ActedInFilmEntity>()
+                .HasIndex(af => new {af.FilmId, af.ActorId}).IsUnique();
+            modelBuilder.Entity<DirectedFilmEntity>()
+                .HasIndex(df => new {df.FilmId, df.DirectorId}).IsUnique();
+
+
+            modelBuilder.SeedPerson();
+            modelBuilder.SeedFilm();
+            modelBuilder.SeedReview();
+            modelBuilder.SeedActedInFilm();
+            modelBuilder.SeedDirectedFilm();
+          //  base.OnModelCreating(modelBuilder);
         }
     }
 }
