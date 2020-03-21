@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FilmDat.DAL.Migrations
 {
     [DbContext(typeof(FilmDatDbContext))]
-    [Migration("20200319084934_InitialCreate")]
+    [Migration("20200321121030_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,7 +87,7 @@ namespace FilmDat.DAL.Migrations
                     b.Property<string>("OriginalName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TitleFoto")
+                    b.Property<string>("TitleFotoUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
@@ -107,7 +107,7 @@ namespace FilmDat.DAL.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Foto")
+                    b.Property<string>("FotoUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")

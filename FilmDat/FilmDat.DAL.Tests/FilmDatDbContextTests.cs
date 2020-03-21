@@ -6,6 +6,8 @@ using System.Data;
 using System.Linq;
 using Xunit;
 using FilmDat.DAL.Enums;
+using FilmDat.DAL.Seeds;
+
 namespace FilmDat.DAL.Tests
 {
     public class FilmDatDbContextTests : IDisposable
@@ -17,6 +19,7 @@ namespace FilmDat.DAL.Tests
         {
             _dbContextfactory = new DbContextInMemoryFactory(nameof(FilmDatDbContext));
             _filmDatDbContext = _dbContextfactory.Create();
+            _filmDatDbContext.Database.EnsureCreated();
         }
 
         [Fact]
@@ -43,8 +46,13 @@ namespace FilmDat.DAL.Tests
                Assert.Equal(personEntity.FotoUrl, fromDb.FotoUrl);
                 //ssert.Equal(personEntity, fromDb, PersonEntity.PersonEntityComparer);
             }
-            
-       
+        }
+
+        [Fact]
+        public void GetAll_Persons()
+        {
+            var fromDb = _filmDatDbContext.Persons.Single(i=>i.ID == PersonSeeds.JohnTravolta.ID);
+            //  Assert.NotEmpty(_filmDatDbContext.Persons.ToArray());
         }
 
         public void Dispose() => _filmDatDbContext?.Dispose();
