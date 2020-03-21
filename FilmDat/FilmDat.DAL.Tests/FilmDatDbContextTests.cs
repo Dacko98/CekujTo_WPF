@@ -51,7 +51,7 @@ namespace FilmDat.DAL.Tests
         [Fact]
         public void GetAll_Persons()
         {
-            var fromDb = _filmDatDbContext.Persons.Single(i=>i.ID == PersonSeeds.JohnTravolta.ID);
+            var fromDb = _filmDatDbContext.Persons.Single(i=>i.ID == Seed.JohnTravolta.ID);
             //  Assert.NotEmpty(_filmDatDbContext.Persons.ToArray());
         }
 

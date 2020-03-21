@@ -9,8 +9,8 @@ namespace FilmDat.DAL.Entities
         public String LastName { get; set; }
         public DateTime BirthDate { get; set; }
         public String FotoUrl { get; set; }
-        public ICollection<DirectedFilmEntity> DirectedFilms { get; } = new List<DirectedFilmEntity>();
-        public ICollection<ActedInFilmEntity> ActedInFilms { get;  } = new List<ActedInFilmEntity>();
+        public ICollection<DirectedFilmEntity> DirectedFilms { get; set; } = new List<DirectedFilmEntity>();
+        public ICollection<ActedInFilmEntity> ActedInFilms { get; set; } = new List<ActedInFilmEntity>();
 
         private sealed class PersonEntityEqualityComparer : IEqualityComparer<PersonEntity>
         {
