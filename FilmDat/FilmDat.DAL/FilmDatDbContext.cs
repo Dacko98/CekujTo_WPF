@@ -32,7 +32,7 @@ namespace FilmDat.DAL
             modelBuilder.SeedReview();
             modelBuilder.SeedActedInFilm();
             modelBuilder.SeedDirectedFilm();
-          //  base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
