@@ -9,7 +9,7 @@ namespace FilmDat.DAL
 {
     public class FilmDatDbContext: DbContext
     {
-        public FilmDatDbContext(DbContextOptions options):base(options)
+        public FilmDatDbContext(DbContextOptions contextOptions):base(contextOptions)
         {
         }
 
