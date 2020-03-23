@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using FilmDat.DAL.Factories;
 namespace FilmDat.DAL.Tests
 {
-    public class DbContextInMemoryFactory : IDbContextFactory<FilmDatDbContext>
+    public class DbContextInMemoryFactory : IDbContextFactory
     {
         private readonly string _databaseName;
 
@@ -10,7 +10,7 @@ namespace FilmDat.DAL.Tests
         {
             _databaseName = databaseName;
         }
-        public FilmDatDbContext Create()
+        public FilmDatDbContext CreateDbContext()
         {
             var dbContextOptionsBuilder = new DbContextOptionsBuilder<FilmDatDbContext>();
             dbContextOptionsBuilder.UseInMemoryDatabase(_databaseName);

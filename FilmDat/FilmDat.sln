@@ -5,7 +5,11 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmDat.DAL", "FilmDat.DAL\FilmDat.DAL.csproj", "{F2311FF9-9328-4975-82FE-EEBAA5C16307}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmDat.DAL.Tests", "FilmDat.DAL.Tests\FilmDat.DAL.Tests.csproj", "{664C1C17-8DAF-45BA-B7DE-36F029029905}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmDat.DAL.Tests", "FilmDat.DAL.Tests\FilmDat.DAL.Tests.csproj", "{664C1C17-8DAF-45BA-B7DE-36F029029905}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmDat.BL", "FilmDat.BL\FilmDat.BL.csproj", "{1247E841-CBA5-4A42-9322-C6713CDAD740}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmDat.Common", "FilmDat.Common\FilmDat.Common.csproj", "{B1679E72-9DE7-44EF-9DFB-1F7527EE666E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{664C1C17-8DAF-45BA-B7DE-36F029029905}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{664C1C17-8DAF-45BA-B7DE-36F029029905}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{664C1C17-8DAF-45BA-B7DE-36F029029905}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1247E841-CBA5-4A42-9322-C6713CDAD740}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1247E841-CBA5-4A42-9322-C6713CDAD740}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1247E841-CBA5-4A42-9322-C6713CDAD740}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1247E841-CBA5-4A42-9322-C6713CDAD740}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1679E72-9DE7-44EF-9DFB-1F7527EE666E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1679E72-9DE7-44EF-9DFB-1F7527EE666E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1679E72-9DE7-44EF-9DFB-1F7527EE666E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1679E72-9DE7-44EF-9DFB-1F7527EE666E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

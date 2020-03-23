@@ -18,7 +18,7 @@ namespace FilmDat.DAL.Tests
         public FilmDatDbContextTests()
         {
             _dbContextfactory = new DbContextInMemoryFactory(nameof(FilmDatDbContext));
-            _filmDatDbContext = _dbContextfactory.Create();
+            _filmDatDbContext = _dbContextfactory.CreateDbContext();
             _filmDatDbContext.Database.EnsureCreated();
         }
 
@@ -36,7 +36,7 @@ namespace FilmDat.DAL.Tests
             _filmDatDbContext.Persons.Add(personEntity);
             _filmDatDbContext.SaveChanges();
 
-            using (var dbx = _dbContextfactory.Create())
+            using (var dbx = _dbContextfactory.CreateDbContext())
             {
                 var fromDb = dbx.Persons.Single(i => i.ID == personEntity.ID);
                 // da sa to bud comparer alebo   
