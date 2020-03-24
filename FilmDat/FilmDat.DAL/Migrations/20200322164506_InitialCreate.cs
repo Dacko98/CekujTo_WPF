@@ -58,7 +58,7 @@ namespace FilmDat.DAL.Migrations
                         name: "FK_Reviews_Films_FilmId",
                         column: x => x.FilmId,
                         principalTable: "Films",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -77,13 +77,13 @@ namespace FilmDat.DAL.Migrations
                         name: "FK_ActedInFilmEntities_Persons_ActorId",
                         column: x => x.ActorId,
                         principalTable: "Persons",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ActedInFilmEntities_Films_FilmId",
                         column: x => x.FilmId,
                         principalTable: "Films",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -102,44 +102,44 @@ namespace FilmDat.DAL.Migrations
                         name: "FK_DirectedFilmEntities_Persons_DirectorId",
                         column: x => x.DirectorId,
                         principalTable: "Persons",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_DirectedFilmEntities_Films_FilmId",
                         column: x => x.FilmId,
                         principalTable: "Films",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
                 table: "Films",
-                columns: new[] { "ID", "Country", "CzechName", "Description", "Duration", "Genre", "OriginalName", "TitleFotoUrl" },
+                columns: new[] { "Id", "Country", "CzechName", "Description", "Duration", "Genre", "OriginalName", "TitleFotoUrl" },
                 values: new object[] { new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c"), "USA", "Pomada", "Romanticky muzikal", new TimeSpan(0, 2, 0, 0, 0), 7, "Grease", "pomada.jpg" });
 
             migrationBuilder.InsertData(
                 table: "Persons",
-                columns: new[] { "ID", "BirthDate", "FirstName", "FotoUrl", "LastName" },
+                columns: new[] { "Id", "BirthDate", "FirstName", "FotoUrl", "LastName" },
                 values: new object[] { new Guid("e1e20085-1ce4-4612-be57-285b8c76d76a"), new DateTime(1972, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "John", "johntravolta.jpg", "Travolta" });
 
             migrationBuilder.InsertData(
                 table: "Persons",
-                columns: new[] { "ID", "BirthDate", "FirstName", "FotoUrl", "LastName" },
+                columns: new[] { "Id", "BirthDate", "FirstName", "FotoUrl", "LastName" },
                 values: new object[] { new Guid("6d372469-af50-4cfe-9582-8789bf598b2b"), new DateTime(1972, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Randal", "randalklieser.jpg", "Kleiser" });
 
             migrationBuilder.InsertData(
                 table: "ActedInFilmEntities",
-                columns: new[] { "ID", "ActorId", "FilmId" },
+                columns: new[] { "Id", "ActorId", "FilmId" },
                 values: new object[] { new Guid("501744f2-4fc1-494b-8b84-5fecb9f7903d"), new Guid("e1e20085-1ce4-4612-be57-285b8c76d76a"), new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c") });
 
             migrationBuilder.InsertData(
                 table: "DirectedFilmEntities",
-                columns: new[] { "ID", "DirectorId", "FilmId" },
+                columns: new[] { "Id", "DirectorId", "FilmId" },
                 values: new object[] { new Guid("75cb065e-643a-4b6f-807f-b3add4cf0eca"), new Guid("6d372469-af50-4cfe-9582-8789bf598b2b"), new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c") });
 
             migrationBuilder.InsertData(
                 table: "Reviews",
-                columns: new[] { "ID", "Date", "FilmId", "NickName", "Rating", "TextReview" },
+                columns: new[] { "Id", "Date", "FilmId", "NickName", "Rating", "TextReview" },
                 values: new object[] { new Guid("585b8ad0-aa06-49dd-94fd-8ab6c93f7e57"), new DateTime(2013, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c"), "Alan232", 82L, "Skvely film plny tanca a zabavy" });
 
             migrationBuilder.CreateIndex(

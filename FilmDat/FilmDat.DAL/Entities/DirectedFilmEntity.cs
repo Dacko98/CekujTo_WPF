@@ -18,15 +18,18 @@ namespace FilmDat.DAL.Entities
                 if (ReferenceEquals(x, null)) return false;
                 if (ReferenceEquals(y, null)) return false;
                 if (x.GetType() != y.GetType()) return false;
-                return x.ID == y.ID && x.FilmId.Equals(y.FilmId) && x.DirectorId.Equals(y.DirectorId) && Equals(x.Film, y.Film) && Equals(x.Director, y.Director);
+                return x.Id.Equals(y.Id) &&
+                       FilmEntity.FilmAloneComparer.Equals(x.Film, y.Film) &&
+                       PersonEntity.PersonEntityAloneComparer.Equals(x.Director, y.Director);
             }
 
             public int GetHashCode(DirectedFilmEntity obj)
             {
-                return HashCode.Combine(obj.FilmId, obj.DirectorId, obj.Film, obj.Director, obj.ID);
+                return HashCode.Combine(obj.FilmId, obj.DirectorId, obj.Film, obj.Director);
             }
         }
 
-        public static IEqualityComparer<DirectedFilmEntity> DirectedFilmEntityComparer { get; } = new DirectedFilmEntityEqualityComparer();
+        public static IEqualityComparer<DirectedFilmEntity> DirectedFilmEntityComparer { get; } =
+            new DirectedFilmEntityEqualityComparer();
     }
 }

@@ -20,15 +20,18 @@ namespace FilmDat.DAL.Entities
                 if (ReferenceEquals(x, null)) return false;
                 if (ReferenceEquals(y, null)) return false;
                 if (x.GetType() != y.GetType()) return false;
-                return x.ID == y.ID && x.NickName == y.NickName && x.Date.Equals(y.Date) && x.Rating == y.Rating && x.TextReview == y.TextReview && x.FilmId.Equals(y.FilmId) && Equals(x.Film, y.Film);
+                return x.NickName == y.NickName && x.Date.Equals(y.Date) && x.Rating == y.Rating &&
+                       x.TextReview == y.TextReview && x.FilmId.Equals(y.FilmId) &&
+                       FilmEntity.FilmAloneComparer.Equals(x.Film, y.Film);
             }
 
             public int GetHashCode(ReviewEntity obj)
             {
-                return HashCode.Combine(obj.NickName, obj.Date, obj.Rating, obj.TextReview, obj.FilmId, obj.Film, obj.ID);
+                return HashCode.Combine(obj.NickName, obj.Date, obj.Rating, obj.TextReview, obj.FilmId, obj.Film);
             }
         }
 
-        public static IEqualityComparer<ReviewEntity> ReviewEntityComparer { get; } = new ReviewEntityEqualityComparer();
+        public static IEqualityComparer<ReviewEntity> ReviewEntityComparer { get; } =
+            new ReviewEntityEqualityComparer();
     }
 }
