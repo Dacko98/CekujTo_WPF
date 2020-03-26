@@ -8,54 +8,219 @@ using Xunit;
 using FilmDat.DAL.Enums;
 using FilmDat.DAL.Seeds;
 
+
 namespace FilmDat.DAL.Tests
 {
     public class FilmDatDbContextTests : IDisposable
+
     {
-        private readonly DbContextInMemoryFactory _dbContextfactory;
+        private readonly DbContextInMemoryFactory _dbContextFactory = new DbContextInMemoryFactory(nameof(FilmDatDbContextTests));
         private readonly FilmDatDbContext _filmDatDbContext;
 
         public FilmDatDbContextTests()
         {
-            _dbContextfactory = new DbContextInMemoryFactory(nameof(FilmDatDbContext));
-            _filmDatDbContext = _dbContextfactory.CreateDbContext();
-            _filmDatDbContext.Database.EnsureCreated();
+            _filmDatDbContext = _dbContextFactory.Create();
+        }
+
+        [Fact]
+        public void AddNew_Film_Persisted()
+        {
+            var film = new FilmEntity()
+            {
+                OriginalName = "Lord of the Rings",
+                Country = "USA",
+                CzechName = "Pan Prstenu",
+                Description = "Something",
+                Genre = GenreEnum.Fantasy,
+                TitleFotoUrl = "path"
+            };
+
+            _filmDatDbContext.Films.Add((film));
+            _filmDatDbContext.SaveChanges();
+
+            using var dbx = _dbContextFactory.Create();
+
+            var fromDb = dbx.Films
+                .Single(i => i.Id == film.Id);
+            Assert.Equal(film, fromDb, FilmEntity.FilmAloneComparer);
+        }
+
+        [Fact]
+        public void AddNew_Review_Persisted()
+        {
+            var review = new ReviewEntity()
+            {
+                TextReview = "Not so bad",
+                Rating = 100,
+                NickName = "Peter"
+            };
+
+            _filmDatDbContext.Reviews.Add(review);
+            _filmDatDbContext.SaveChanges();
+
+            using var dbx = _dbContextFactory.Create();
+            var fromDb = dbx.Reviews
+                .Single(i => i.Id == review.Id);
+            Assert.Equal(review, fromDb, ReviewEntity.ReviewEntityComparer);
         }
 
         [Fact]
         public void AddNew_Person_Persisted()
         {
-            var personEntity = new PersonEntity()
+            var person = new PersonEntity()
             {
-                FirstName = "Ján",
-                LastName = "Mikulec",
-                BirthDate = new DateTime(1987,11,10),
-                FotoUrl = "fotka.jpg",
+                FirstName = "Jackie",
+                LastName = "Chan"
             };
-           
-            _filmDatDbContext.Persons.Add(personEntity);
+
+            _filmDatDbContext.Persons.Add(person);
             _filmDatDbContext.SaveChanges();
 
-            using (var dbx = _dbContextfactory.CreateDbContext())
+            using var dbx = _dbContextFactory.Create();
+            var fromDb = dbx.Persons
+                .Single(i => i.Id == person.Id);
+            Assert.Equal(person, fromDb, PersonEntity.PersonEntityComparer);
+        }
+
+
+        [Fact]
+        public void addNew_FilmWithPerson_Persisted()
+        {
+            var film = new FilmEntity()
             {
-                var fromDb = dbx.Persons.Single(i => i.ID == personEntity.ID);
-                // da sa to bud comparer alebo   
-               Assert.Equal(personEntity.FirstName, fromDb.FirstName);
-               Assert.Equal(personEntity.LastName, fromDb.LastName);
-               Assert.Equal(personEntity.BirthDate, fromDb.BirthDate);
-               Assert.Equal(personEntity.FotoUrl, fromDb.FotoUrl);
-                //ssert.Equal(personEntity, fromDb, PersonEntity.PersonEntityComparer);
-            }
+                OriginalName = "The Avengers",
+                Country = "USA",
+                CzechName = "Avengers",
+                Description = "Marvel...",
+                Genre = GenreEnum.SciFi,
+                TitleFotoUrl = "path",
+                Actors =
+                {
+                    new ActedInFilmEntity()
+                    {
+                        Actor = new PersonEntity()
+                        {
+                            FirstName = "Robert",
+                            LastName = "Downey ",
+                        }
+                    }
+                },
+                Directors =
+                {
+                    new DirectedFilmEntity()
+                    {
+                        Director = new PersonEntity()
+                        {
+                            FirstName = "Joss",
+                            LastName = "Whedon"
+                        }
+                    }
+                }
+            };
+
+            _filmDatDbContext.Films.Add((film));
+            _filmDatDbContext.SaveChanges();
+
+            using var dbx = _dbContextFactory.Create();
+
+            var fromDb = dbx.Films
+                .Include(entity => entity.Actors)
+                .ThenInclude(actor => actor.Actor)
+                .Include(entity => entity.Directors)
+                .ThenInclude(director => director.Director)
+                .Single(i => i.Id == film.Id);
+            Assert.Equal(film, fromDb, FilmEntity.FilmComparer);
+        }
+
+
+        [Fact]
+        public void addNew_PersonWithFilm_Persisted()
+        {
+            var person = new PersonEntity()
+            {
+                FirstName = "Brad",
+                LastName = "Pitt",
+
+                ActedInFilms =
+                {
+                    new ActedInFilmEntity()
+                    {
+                        Film = new FilmEntity()
+                        {
+                            OriginalName = "The Avengers",
+                            Country = "USA",
+                            CzechName = "Avengers",
+                            Description = "Marvel...",
+                            Genre = GenreEnum.SciFi,
+                            TitleFotoUrl = "path",
+                        }
+                    }
+                },
+                DirectedFilms =
+                {
+                    new DirectedFilmEntity()
+                    {
+                        Film = new FilmEntity()
+                        {
+                            OriginalName = "The Avengers",
+                            Country = "USA",
+                            CzechName = "Avengers",
+                            Description = "Marvel...",
+                            Genre = GenreEnum.SciFi,
+                            TitleFotoUrl = "path",
+                        }
+                    }
+                }
+            };
+
+            _filmDatDbContext.Persons.Add((person));
+            _filmDatDbContext.SaveChanges();
+
+            using var dbx = _dbContextFactory.Create();
+
+            var fromDb = dbx.Persons
+                .Include(entity => entity.ActedInFilms)
+                .ThenInclude(film => film.Film)
+                .Include(entity => entity.DirectedFilms)
+                .ThenInclude(director => director.Film)
+                .Single(i => i.Id == person.Id);
+            Assert.Equal(person, fromDb, PersonEntity.PersonEntityComparer);
         }
 
         [Fact]
-        public void GetAll_Persons()
+        public void addNew_FilmWithReview_Persisted()
         {
-            var fromDb = _filmDatDbContext.Persons.Single(i=>i.ID == Seed.JohnTravolta.ID);
-            //  Assert.NotEmpty(_filmDatDbContext.Persons.ToArray());
+            var film = new FilmEntity()
+            {
+                OriginalName = "The",
+                Country = "Best",
+                CzechName = "Film",
+                Description = "in",
+                TitleFotoUrl = "history",
+                Genre = GenreEnum.Documentary,
+                Reviews =
+                {
+                    new ReviewEntity()
+                    {
+                        TextReview = "Something",
+                        NickName = "Someone",
+                        Rating = 99
+                    }
+                }
+            };
+
+            _filmDatDbContext.Films.Add((film));
+            _filmDatDbContext.SaveChanges();
+
+            using var dbx = _dbContextFactory.Create();
+
+            var fromDb = dbx.Films
+                .Include(entity => entity.Reviews)
+                .Single(i => i.Id == film.Id);
+            Assert.Equal(film, fromDb, FilmEntity.FilmComparer);
         }
+
 
         public void Dispose() => _filmDatDbContext?.Dispose();
     }
 }
- 

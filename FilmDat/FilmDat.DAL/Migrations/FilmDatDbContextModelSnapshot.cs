@@ -21,7 +21,7 @@ namespace FilmDat.DAL.Migrations
 
             modelBuilder.Entity("FilmDat.DAL.Entities.ActedInFilmEntity", b =>
                 {
-                    b.Property<Guid>("ID")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -31,7 +31,7 @@ namespace FilmDat.DAL.Migrations
                     b.Property<Guid>("FilmId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.HasIndex("ActorId");
 
@@ -51,7 +51,7 @@ namespace FilmDat.DAL.Migrations
 
             modelBuilder.Entity("FilmDat.DAL.Entities.DirectedFilmEntity", b =>
                 {
-                    b.Property<Guid>("ID")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -61,7 +61,7 @@ namespace FilmDat.DAL.Migrations
                     b.Property<Guid>("FilmId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.HasIndex("DirectorId");
 
@@ -81,7 +81,7 @@ namespace FilmDat.DAL.Migrations
 
             modelBuilder.Entity("FilmDat.DAL.Entities.FilmEntity", b =>
                 {
-                    b.Property<Guid>("ID")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -106,7 +106,7 @@ namespace FilmDat.DAL.Migrations
                     b.Property<string>("TitleFotoUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("Films");
 
@@ -126,7 +126,7 @@ namespace FilmDat.DAL.Migrations
 
             modelBuilder.Entity("FilmDat.DAL.Entities.PersonEntity", b =>
                 {
-                    b.Property<Guid>("ID")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -142,7 +142,7 @@ namespace FilmDat.DAL.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("Persons");
 
@@ -167,7 +167,7 @@ namespace FilmDat.DAL.Migrations
 
             modelBuilder.Entity("FilmDat.DAL.Entities.ReviewEntity", b =>
                 {
-                    b.Property<Guid>("ID")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -186,7 +186,7 @@ namespace FilmDat.DAL.Migrations
                     b.Property<string>("TextReview")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.HasIndex("FilmId");
 
