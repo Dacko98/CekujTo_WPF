@@ -14,12 +14,14 @@ namespace FilmDat.DAL.Tests
     public class FilmDatDbContextTests : IDisposable
 
     {
-        private readonly DbContextInMemoryFactory _dbContextFactory = new DbContextInMemoryFactory(nameof(FilmDatDbContextTests));
+        private readonly DbContextInMemoryFactory _dbContextFactory;
         private readonly FilmDatDbContext _filmDatDbContext;
 
         public FilmDatDbContextTests()
         {
-            _filmDatDbContext = _dbContextFactory.Create();
+            _dbContextFactory = new DbContextInMemoryFactory(nameof(FilmDatDbContext));
+            _filmDatDbContext = _dbContextFactory.CreateDbContext();
+            _filmDatDbContext.Database.EnsureCreated();
         }
 
         [Fact]
@@ -38,7 +40,7 @@ namespace FilmDat.DAL.Tests
             _filmDatDbContext.Films.Add((film));
             _filmDatDbContext.SaveChanges();
 
-            using var dbx = _dbContextFactory.Create();
+            using var dbx = _dbContextFactory.CreateDbContext();
 
             var fromDb = dbx.Films
                 .Single(i => i.Id == film.Id);
@@ -58,7 +60,7 @@ namespace FilmDat.DAL.Tests
             _filmDatDbContext.Reviews.Add(review);
             _filmDatDbContext.SaveChanges();
 
-            using var dbx = _dbContextFactory.Create();
+            using var dbx = _dbContextFactory.CreateDbContext();
             var fromDb = dbx.Reviews
                 .Single(i => i.Id == review.Id);
             Assert.Equal(review, fromDb, ReviewEntity.ReviewEntityComparer);
@@ -76,7 +78,7 @@ namespace FilmDat.DAL.Tests
             _filmDatDbContext.Persons.Add(person);
             _filmDatDbContext.SaveChanges();
 
-            using var dbx = _dbContextFactory.Create();
+            using var dbx = _dbContextFactory.CreateDbContext();
             var fromDb = dbx.Persons
                 .Single(i => i.Id == person.Id);
             Assert.Equal(person, fromDb, PersonEntity.PersonEntityComparer);
@@ -121,7 +123,7 @@ namespace FilmDat.DAL.Tests
             _filmDatDbContext.Films.Add((film));
             _filmDatDbContext.SaveChanges();
 
-            using var dbx = _dbContextFactory.Create();
+            using var dbx = _dbContextFactory.CreateDbContext();
 
             var fromDb = dbx.Films
                 .Include(entity => entity.Actors)
@@ -176,7 +178,7 @@ namespace FilmDat.DAL.Tests
             _filmDatDbContext.Persons.Add((person));
             _filmDatDbContext.SaveChanges();
 
-            using var dbx = _dbContextFactory.Create();
+            using var dbx = _dbContextFactory.CreateDbContext();
 
             var fromDb = dbx.Persons
                 .Include(entity => entity.ActedInFilms)
@@ -212,7 +214,7 @@ namespace FilmDat.DAL.Tests
             _filmDatDbContext.Films.Add((film));
             _filmDatDbContext.SaveChanges();
 
-            using var dbx = _dbContextFactory.Create();
+            using var dbx = _dbContextFactory.CreateDbContext();
 
             var fromDb = dbx.Films
                 .Include(entity => entity.Reviews)
