@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using FilmDat.DAL.Enums;
+using FilmDat.BL.Models.ListModels;
 
 namespace FilmDat.BL.Models.DetailModels
 {
@@ -14,6 +15,9 @@ namespace FilmDat.BL.Models.DetailModels
         public String Country { get; set; }
         public TimeSpan Duration { get; set; }
         public String Description { get; set; }
+        public ICollection<ActedInFilmListModel> Actors { get; set; }
+        public ICollection<DirectedFilmListModel> Directors { get; set; }
+        public ICollection<ReviewListModel> Ratings { get; set; }
 
         private sealed class FilmDetailModelEqualityComparer : IEqualityComparer<FilmDetailModel>
         {

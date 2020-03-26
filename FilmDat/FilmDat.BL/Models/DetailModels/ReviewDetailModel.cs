@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using FilmDat.BL.Models.ListModels;
 
 namespace FilmDat.BL.Models.DetailModels
 {
@@ -10,6 +11,7 @@ namespace FilmDat.BL.Models.DetailModels
         public DateTime Date { get; set; }
         public uint Rating { get; set; }
         public String TextReview { get; set; }
+        public FilmListModel OriginalName { get; set; }
 
         private sealed class ReviewDetailModelEqualityComparer : IEqualityComparer<ReviewDetailModel>
         {

@@ -6,8 +6,10 @@ namespace FilmDat.BL.Models.ListModels
 {
     public class ActedInFilmListModel:BaseModel
     {
-        
-        public Guid FilmId { get; set; }
         public Guid ActorId { get; set; }
+        public String FirstName { get; set; }
+        public String LastName { get; set; }
+        public Guid FilmId { get; set; }
+        public String OriginalName { get; set; }
     }
 }
