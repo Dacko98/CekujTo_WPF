@@ -6,7 +6,7 @@ namespace FilmDat.BL.Models.ListModels
 {
      public class FilmListModel : BaseModel
     {
-        public Guid ID { get; set; }
+        
         public string OriginalName { get; set; }
     }
 }

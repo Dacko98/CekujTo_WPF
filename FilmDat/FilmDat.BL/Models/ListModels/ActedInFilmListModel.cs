@@ -6,7 +6,7 @@ namespace FilmDat.BL.Models.ListModels
 {
     public class ActedInFilmListModel:BaseModel
     {
-        public Guid ID { get; set; }
+        
         public Guid FilmId { get; set; }
         public Guid ActorId { get; set; }
     }
