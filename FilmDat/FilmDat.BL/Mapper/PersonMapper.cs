@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FilmDat.BL.Mapper
 {
-    class PesonMapper
+    class PersonMapper
     {
     }
 }
