@@ -73,9 +73,9 @@ namespace FilmDat.BL.Mapper
             entity.Country = detailModel.Country;
             entity.Duration = detailModel.Duration;
             entity.Description = detailModel.Description;
-            entity.Reviews = detailModel.Reviews.Select(listModel => ReviewMapper.MapToEntity(listModel, entityFactory)).ToList();
-            entity.Actors = detailModel.Actors.Select(listModel => PersonMapper.MapToEntity(listModel, entityFactory)).ToList();
-            entity.Directors = detailModel.Directors.Select(listModel => PersonMapper.MapToEntity(listModel, entityFactory)).ToList();
+            entity.Reviews = detailModel.Reviews.Select(detailModel => ReviewMapper.MapToEntity(detailModel, entityFactory)).ToList();
+            entity.Actors = detailModel.Actors.Select(detailModel => PersonMapper.MapToEntity(detailModel, entityFactory)).ToList();
+            entity.Directors = detailModel.Directors.Select(detailModel => PersonMapper.MapToEntity(detailModel, entityFactory)).ToList();
             return entity;
         }
     }
