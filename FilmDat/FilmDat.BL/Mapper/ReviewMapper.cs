@@ -45,7 +45,6 @@ namespace FilmDat.BL.Mapper
             entity.TextReview = detailModel.TextReview;
             entity.NickName = detailModel.TextReview;
             entity.FilmId = detailModel.OriginalName.Id;
-            entity.Film = // nevieme
 
             return entity;
         }

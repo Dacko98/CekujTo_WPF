@@ -63,9 +63,9 @@ namespace FilmDat.BL.Mapper
             entity.LastName = detailModel.LastName;
             entity.BirthDate = detailModel.BirthDate;
             entity.FotoUrl = detailModel.FotoUrl;
-            entity.DirectedFilms = detailModel.DirectedFilms.Select(detailModel => DirectedInFilmMapper.MapToEntity(detailModel, entityFactory)).ToList();
-            entity.ActedInFilms = detailModel.ActedInFilms.Select(detailModel => ActedInFilmMapper.MapToEntity(detailModel, entityFactory)).ToList();
-            
+            entity.DirectedFilms = detailModel.DirectedFilms.Select(listModel => DirectedInFilmMapper.MapToEntity(listModel, entityFactory)).ToList();
+            entity.ActedInFilms = detailModel.ActedInFilms.Select(listModel => ActedInFilmMapper.MapToEntity(listModel, entityFactory)).ToList();
+
             return entity;
         }
     }

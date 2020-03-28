@@ -31,8 +31,6 @@ namespace FilmDat.BL.Mapper
             entity.Id = listModel.Id;
             entity.FilmId = listModel.FilmId;
             entity.ActorId = listModel.ActorId;
-            entity.Film = listModel.FilmId // nevieme
-            entity.Actor =  // idk
             return entity;
         }
     }
