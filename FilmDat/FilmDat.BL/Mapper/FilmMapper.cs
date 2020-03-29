@@ -72,9 +72,17 @@ namespace FilmDat.BL.Mapper
             entity.Duration = detailModel.Duration;
             entity.Description = detailModel.Description;
 
-            entity.Reviews = detailModel.Reviews.Select(detailModel => ReviewMapper.MapToEntity(detailModel, entityFactory)).ToList();
-            entity.Actors = detailModel.Actors.Select(detailModel => PersonMapper.MapToEntity(detailModel, entityFactory)).ToList();
-            entity.Directors = detailModel.Directors.Select(detailModel => PersonMapper.MapToEntity(detailModel, entityFactory)).ToList();
+            entity.Reviews = detailModel.Reviews.Select(model =>
+            {
+                var ReviewEntity = entityFactory.Create<ReviewEntity>(model.Id);
+                ReviewEntity.FilmId = model.FilmId;
+                ReviewEntity.Rating = model.Rating;
+                ReviewEntity.TextReview = model.TextReview;
+                return ReviewEntity;
+            }).ToList();
+
+            entity.Actors = detailModel.Actors.Select(model => ActedInFilmMapper.MapToEntity(model, entityFactory)).ToList();
+            entity.Directors = detailModel.Directors.Select(model => DirectedInFilmMapper.MapToEntity(model, entityFactory)).ToList();
 
             return entity;
         }
