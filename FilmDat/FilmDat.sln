@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmDat.DAL.Tests", "FilmDa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmDat.BL", "FilmDat.BL\FilmDat.BL.csproj", "{1247E841-CBA5-4A42-9322-C6713CDAD740}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmDat.Common", "FilmDat.Common\FilmDat.Common.csproj", "{B1679E72-9DE7-44EF-9DFB-1F7527EE666E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmDat.Common", "FilmDat.Common\FilmDat.Common.csproj", "{B1679E72-9DE7-44EF-9DFB-1F7527EE666E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmDat.BL.Tests", "FilmDat.BL.Tests\FilmDat.BL.Tests.csproj", "{92619E41-8D27-47E5-BA94-02E99E664C27}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{B1679E72-9DE7-44EF-9DFB-1F7527EE666E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1679E72-9DE7-44EF-9DFB-1F7527EE666E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1679E72-9DE7-44EF-9DFB-1F7527EE666E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92619E41-8D27-47E5-BA94-02E99E664C27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92619E41-8D27-47E5-BA94-02E99E664C27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92619E41-8D27-47E5-BA94-02E99E664C27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92619E41-8D27-47E5-BA94-02E99E664C27}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
