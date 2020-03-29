@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using FilmDat.BL.Factories;
 using FilmDat.BL.Models.DetailModels;
 using FilmDat.BL.Models.ListModels;
@@ -36,7 +33,7 @@ namespace FilmDat.BL.Mapper
                     Duration = entity.Duration,
                     Description = entity.Description,
                     Actors = entity.Actors.Select(
-                        PersonEntity => new ActedInFilmListModel()
+                        PersonEntity => new ActedInFilmDetailModel()
                         {
                             Id = PersonEntity.Id,
                             ActorId = PersonEntity.ActorId,
@@ -45,7 +42,7 @@ namespace FilmDat.BL.Mapper
                             LastName = PersonEntity.Actor.LastName
                         }).ToList(),
                     Directors = entity.Directors.Select(
-                        PersonEntity => new DirectedFilmListModel()
+                        PersonEntity => new DirectedFilmDetailModel()
                         {
                             Id = PersonEntity.Id,
                             DirectorId = PersonEntity.DirectorId,
@@ -65,6 +62,7 @@ namespace FilmDat.BL.Mapper
         public static FilmEntity MapToEntity(FilmDetailModel detailModel, IEntityFactory entityFactory)
         {
             var entity = (entityFactory ??= new CreateNewEntityFactory()).Create<FilmEntity>(detailModel.Id);
+
             entity.Id = detailModel.Id;
             entity.OriginalName = detailModel.OriginalName;
             entity.CzechName = detailModel.CzechName;
@@ -73,9 +71,11 @@ namespace FilmDat.BL.Mapper
             entity.Country = detailModel.Country;
             entity.Duration = detailModel.Duration;
             entity.Description = detailModel.Description;
+
             entity.Reviews = detailModel.Reviews.Select(detailModel => ReviewMapper.MapToEntity(detailModel, entityFactory)).ToList();
             entity.Actors = detailModel.Actors.Select(detailModel => PersonMapper.MapToEntity(detailModel, entityFactory)).ToList();
             entity.Directors = detailModel.Directors.Select(detailModel => PersonMapper.MapToEntity(detailModel, entityFactory)).ToList();
+
             return entity;
         }
     }

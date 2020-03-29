@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FilmDat.BL.Models.ListModels
+namespace FilmDat.BL.Models.DetailModels
 {
-    public class DirectedFilmListModel : BaseModel
+    public class DirectedFilmDetailModel : BaseModel
     {
         public Guid DirectorId { get; set; }
         public String FirstName { get; set; }
@@ -11,9 +11,9 @@ namespace FilmDat.BL.Models.ListModels
         public Guid FilmId { get; set; }
         public String OriginalName { get; set; }
 
-        private sealed class DirectedFilmListModelEqualityComparer : IEqualityComparer<DirectedFilmListModel>
+        private sealed class DirectedFilmListModelEqualityComparer : IEqualityComparer<DirectedFilmDetailModel>
         {
-            public bool Equals(DirectedFilmListModel x, DirectedFilmListModel y)
+            public bool Equals(DirectedFilmDetailModel x, DirectedFilmDetailModel y)
             {
                 if (ReferenceEquals(x, y)) return true;
                 if (ReferenceEquals(x, null)) return false;
@@ -22,12 +22,12 @@ namespace FilmDat.BL.Models.ListModels
                 return x.DirectorId.Equals(y.DirectorId) && x.FirstName == y.FirstName && x.LastName == y.LastName && x.FilmId.Equals(y.FilmId) && x.OriginalName == y.OriginalName;
             }
 
-            public int GetHashCode(DirectedFilmListModel obj)
+            public int GetHashCode(DirectedFilmDetailModel obj)
             {
                 return HashCode.Combine(obj.DirectorId, obj.FirstName, obj.LastName, obj.FilmId, obj.OriginalName);
             }
         }
 
-        public static IEqualityComparer<DirectedFilmListModel> DirectedFilmListModelComparer { get; } = new DirectedFilmListModelEqualityComparer();
+        public static IEqualityComparer<DirectedFilmDetailModel> DirectedFilmListModelComparer { get; } = new DirectedFilmListModelEqualityComparer();
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Text;
-using FilmDat.BL.Factories;
+﻿using FilmDat.BL.Factories;
 using FilmDat.BL.Models.DetailModels;
 using FilmDat.BL.Models.ListModels;
 using FilmDat.DAL.Entities;
@@ -39,6 +35,7 @@ namespace FilmDat.BL.Mapper
         public static ReviewEntity MapToEntity(ReviewDetailModel detailModel, IEntityFactory entityFactory)
         {
             var entity = (entityFactory ??= new CreateNewEntityFactory()).Create<ReviewEntity>(detailModel.Id);
+
             entity.Id = detailModel.Id;
             entity.Date = detailModel.Date;
             entity.Rating = detailModel.Rating;

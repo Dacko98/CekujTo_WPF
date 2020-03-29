@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace FilmDat.BL.Models.ListModels
+namespace FilmDat.BL.Models.DetailModels
 {
-    public class ActedInFilmListModel:BaseModel
+    public class ActedInFilmDetailModel : BaseModel
     {
         public Guid ActorId { get; set; }
         public String FirstName { get; set; }
@@ -12,9 +11,9 @@ namespace FilmDat.BL.Models.ListModels
         public Guid FilmId { get; set; }
         public String OriginalName { get; set; }
 
-        private sealed class ActedInFilmListModelEqualityComparer : IEqualityComparer<ActedInFilmListModel>
+        private sealed class ActedInFilmListModelEqualityComparer : IEqualityComparer<ActedInFilmDetailModel>
         {
-            public bool Equals(ActedInFilmListModel x, ActedInFilmListModel y)
+            public bool Equals(ActedInFilmDetailModel x, ActedInFilmDetailModel y)
             {
                 if (ReferenceEquals(x, y)) return true;
                 if (ReferenceEquals(x, null)) return false;
@@ -23,12 +22,12 @@ namespace FilmDat.BL.Models.ListModels
                 return x.ActorId.Equals(y.ActorId) && x.FirstName == y.FirstName && x.LastName == y.LastName && x.FilmId.Equals(y.FilmId) && x.OriginalName == y.OriginalName;
             }
 
-            public int GetHashCode(ActedInFilmListModel obj)
+            public int GetHashCode(ActedInFilmDetailModel obj)
             {
                 return HashCode.Combine(obj.ActorId, obj.FirstName, obj.LastName, obj.FilmId, obj.OriginalName);
             }
         }
 
-        public static IEqualityComparer<ActedInFilmListModel> ActedInFilmListModelComparer { get; } = new ActedInFilmListModelEqualityComparer();
+        public static IEqualityComparer<ActedInFilmDetailModel> ActedInFilmListModelComparer { get; } = new ActedInFilmListModelEqualityComparer();
     }
 }

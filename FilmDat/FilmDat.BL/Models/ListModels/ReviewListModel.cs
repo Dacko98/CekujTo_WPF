@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace FilmDat.BL.Models.ListModels
 {
@@ -8,8 +7,9 @@ namespace FilmDat.BL.Models.ListModels
     {
         public Guid FilmId { get; set; }
         public uint Rating { get; set; }
+        public String TextReview { get; set; }
 
-        private sealed class FilmIdRatingEqualityComparer : IEqualityComparer<ReviewListModel>
+        private sealed class FilmIdRatingTextReviewEqualityComparer : IEqualityComparer<ReviewListModel>
         {
             public bool Equals(ReviewListModel x, ReviewListModel y)
             {
@@ -17,15 +17,15 @@ namespace FilmDat.BL.Models.ListModels
                 if (ReferenceEquals(x, null)) return false;
                 if (ReferenceEquals(y, null)) return false;
                 if (x.GetType() != y.GetType()) return false;
-                return x.FilmId.Equals(y.FilmId) && x.Rating == y.Rating;
+                return x.FilmId.Equals(y.FilmId) && x.Rating == y.Rating && x.TextReview == y.TextReview;
             }
 
             public int GetHashCode(ReviewListModel obj)
             {
-                return HashCode.Combine(obj.FilmId, obj.Rating);
+                return HashCode.Combine(obj.FilmId, obj.Rating, obj.TextReview);
             }
         }
 
-        public static IEqualityComparer<ReviewListModel> FilmIdRatingComparer { get; } = new FilmIdRatingEqualityComparer();
+        public static IEqualityComparer<ReviewListModel> FilmIdRatingTextReviewComparer { get; } = new FilmIdRatingTextReviewEqualityComparer();
     }
 }

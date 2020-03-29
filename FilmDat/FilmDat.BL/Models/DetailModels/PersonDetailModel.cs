@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
 using FilmDat.BL.Models.ListModels;
 
 namespace FilmDat.BL.Models.DetailModels
 {
-    public class PersonDetailModel:BaseModel
+    public class PersonDetailModel : BaseModel
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
         public string FotoUrl { get; set; }
-        public ICollection<ActedInFilmListModel> ActedInFilms { get; set; }
-        public ICollection<DirectedFilmListModel> DirectedFilms { get; set; }
+        public ICollection<ActedInFilmDetailModel> ActedInFilms { get; set; }
+        public ICollection<DirectedFilmDetailModel> DirectedFilms { get; set; }
 
         private sealed class PersonDetailModelEqualityComparer : IEqualityComparer<PersonDetailModel>
         {

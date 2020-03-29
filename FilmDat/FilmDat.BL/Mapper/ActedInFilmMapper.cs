@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FilmDat.BL.Factories;
-using FilmDat.BL.Models.ListModels;
+﻿using FilmDat.BL.Factories;
+using FilmDat.BL.Models.DetailModels;
 using FilmDat.DAL.Entities;
 using FilmDat.DAL.Interfaces;
 
@@ -11,10 +8,10 @@ namespace FilmDat.BL.Mapper
     internal static class ActedInFilmMapper
     {
 
-        public static ActedInFilmListModel MapToListModel(ActedInFilmEntity entity) =>
+        public static ActedInFilmDetailModel MapToListModel(ActedInFilmEntity entity) =>
             entity == null
                 ? null
-                : new ActedInFilmListModel()
+                : new ActedInFilmDetailModel()
                 {
                     Id = entity.Id,
                     ActorId  = entity.ActorId,
@@ -24,13 +21,14 @@ namespace FilmDat.BL.Mapper
                     OriginalName = entity.Film.OriginalName
                 };
 
-        public static ActedInFilmEntity MapToEntity(ActedInFilmListModel listModel, IEntityFactory entityFactory)
+        public static ActedInFilmEntity MapToEntity(ActedInFilmDetailModel detailModel, IEntityFactory entityFactory)
         {
-            var entity = (entityFactory ??= new CreateNewEntityFactory()).Create<ActedInFilmEntity>(listModel.Id);
+            var entity = (entityFactory ??= new CreateNewEntityFactory()).Create<ActedInFilmEntity>(detailModel.Id);
 
-            entity.Id = listModel.Id;
-            entity.FilmId = listModel.FilmId;
-            entity.ActorId = listModel.ActorId;
+            entity.Id = detailModel.Id;
+            entity.FilmId = detailModel.FilmId;
+            entity.ActorId = detailModel.ActorId;
+
             return entity;
         }
     }
