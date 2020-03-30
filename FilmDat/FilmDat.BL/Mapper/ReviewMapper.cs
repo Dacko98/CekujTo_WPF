@@ -46,6 +46,7 @@ namespace FilmDat.BL.Mapper
         {
             var entity = (entityFactory ??= new CreateNewEntityFactory()).Create<ReviewEntity>(model.Id);
 
+            entity.Id = model.Id;
             entity.Rating = model.Rating;
             entity.TextReview = model.TextReview;
 

@@ -2,6 +2,7 @@
 using FilmDat.BL.Models.ListModels;
 using FilmDat.DAL.Entities;
 using FilmDat.DAL.Interfaces;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace FilmDat.BL.Mapper
 {
@@ -22,6 +23,7 @@ namespace FilmDat.BL.Mapper
         {
             var entity = (entityFactory ??= new CreateNewEntityFactory()).Create<DirectedFilmEntity>(model.Id);
 
+            entity.Id = model.Id;
             entity.Film.OriginalName = model.OriginalName;
 
             return entity;

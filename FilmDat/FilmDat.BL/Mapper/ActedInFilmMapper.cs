@@ -22,6 +22,7 @@ namespace FilmDat.BL.Mapper
         {
             var entity = (entityFactory ??= new CreateNewEntityFactory()).Create<ActedInFilmEntity>(model.Id);
 
+            entity.Id = model.Id;
             entity.Film.OriginalName = model.OriginalName;
 
             return entity;

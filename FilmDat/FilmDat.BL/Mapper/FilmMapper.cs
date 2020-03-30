@@ -70,10 +70,10 @@ namespace FilmDat.BL.Mapper
             entity.Duration = detailModel.Duration;
             entity.Description = detailModel.Description;
 
-            entity.Reviews = detailModel.Reviews.Select(model => ReviewMapper.MapToEntity(model, entityFactory))
-                .ToList();
-            entity.Actors = detailModel.Actors.Select(model => ActedInFilmMapper.MapToEntity(model, entityFactory))
-                .ToList();
+            entity.Reviews = detailModel.Reviews
+                .Select(model => ReviewMapper.MapToEntity(model, entityFactory)).ToList();
+            entity.Actors = detailModel.Actors
+                .Select(model => ActedInFilmMapper.MapToEntity(model, entityFactory)).ToList();
             entity.Directors = detailModel.Directors
                 .Select(model => DirectedFilmMapper.MapToEntity(model, entityFactory)).ToList();
 
