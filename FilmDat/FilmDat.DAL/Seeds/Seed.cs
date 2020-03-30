@@ -13,7 +13,7 @@ namespace FilmDat.DAL.Seeds
             Id = Guid.Parse("e1e20085-1ce4-4612-be57-285b8c76d76a"),
             FirstName = "John",
             LastName = "Travolta",
-            BirthDate = new DateTime(1972,11,12),
+            BirthDate = new DateTime(1972, 11, 12),
             FotoUrl = "johntravolta.jpg",
             DirectedFilms = new List<DirectedFilmEntity>(),
             ActedInFilms = new List<ActedInFilmEntity>()
@@ -27,9 +27,9 @@ namespace FilmDat.DAL.Seeds
             Genre = GenreEnum.Romance,
             TitleFotoUrl = "pomada.jpg",
             Country = "USA",
-            Duration = new TimeSpan(2,0,0),
+            Duration = new TimeSpan(2, 0, 0),
             Description = "Romanticky muzikal",
-            Reviews =  new List<ReviewEntity>(),
+            Reviews = new List<ReviewEntity>(),
             Directors = new List<DirectedFilmEntity>(),
             Actors = new List<ActedInFilmEntity>()
         };
@@ -82,6 +82,7 @@ namespace FilmDat.DAL.Seeds
             GreaseFilm.Directors.Add(RandalKleiserFilm);
             RandalKleiser.DirectedFilms.Add(RandalKleiserFilm);
         }
+
         public static void SeedPerson(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<PersonEntity>()
@@ -93,7 +94,7 @@ namespace FilmDat.DAL.Seeds
                         LastName = JohnTravolta.LastName,
                         BirthDate = JohnTravolta.BirthDate,
                         FotoUrl = JohnTravolta.FotoUrl
-                    }, 
+                    },
                     new PersonEntity()
                     {
                         Id = RandalKleiser.Id,
@@ -109,7 +110,7 @@ namespace FilmDat.DAL.Seeds
         {
             modelBuilder.Entity<FilmEntity>()
                 .HasData(new FilmEntity()
-                { 
+                {
                     Id = GreaseFilm.Id,
                     OriginalName = GreaseFilm.OriginalName,
                     CzechName = GreaseFilm.CzechName,
@@ -134,6 +135,7 @@ namespace FilmDat.DAL.Seeds
                     FilmId = FilmReviews.FilmId
                 });
         }
+
         public static void SeedActedInFilm(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ActedInFilmEntity>()
@@ -144,6 +146,7 @@ namespace FilmDat.DAL.Seeds
                     ActorId = JohnTravoltaFilm.ActorId
                 });
         }
+
         public static void SeedDirectedFilm(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DirectedFilmEntity>()

@@ -21,7 +21,6 @@ namespace FilmDat.BL.Tests
         [Fact]
         public void Test1()
         {
-
         }
 
         public void Dispose()

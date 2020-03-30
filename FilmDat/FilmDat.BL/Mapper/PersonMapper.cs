@@ -29,7 +29,7 @@ namespace FilmDat.BL.Mapper
                     LastName = entity.LastName,
                     BirthDate = entity.BirthDate,
                     FotoUrl = entity.FotoUrl,
-                 
+
                     ActedInFilms = entity.ActedInFilms.Select(
                         FilmEntity => new FilmListModel()
                         {
@@ -55,8 +55,10 @@ namespace FilmDat.BL.Mapper
             entity.BirthDate = detailModel.BirthDate;
             entity.FotoUrl = detailModel.FotoUrl;
 
-            entity.DirectedFilms = detailModel.DirectedFilms.Select(model => DirectedFilmMapper.MapToEntity(model, entityFactory)).ToList();
-            entity.ActedInFilms = detailModel.ActedInFilms.Select(model => ActedInFilmMapper.MapToEntity(model, entityFactory)).ToList();
+            entity.DirectedFilms = detailModel.DirectedFilms
+                .Select(model => DirectedFilmMapper.MapToEntity(model, entityFactory)).ToList();
+            entity.ActedInFilms = detailModel.ActedInFilms
+                .Select(model => ActedInFilmMapper.MapToEntity(model, entityFactory)).ToList();
 
             return entity;
         }

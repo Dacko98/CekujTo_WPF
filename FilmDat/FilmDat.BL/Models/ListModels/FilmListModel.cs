@@ -2,7 +2,7 @@
 
 namespace FilmDat.BL.Models.ListModels
 {
-     public class FilmListModel : BaseModel
+    public class FilmListModel : BaseModel
     {
         public string OriginalName { get; set; }
 
@@ -23,6 +23,7 @@ namespace FilmDat.BL.Models.ListModels
             }
         }
 
-        public static IEqualityComparer<FilmListModel> OriginalNameComparer { get; } = new OriginalNameEqualityComparer();
+        public static IEqualityComparer<FilmListModel> OriginalNameComparer { get; } =
+            new OriginalNameEqualityComparer();
     }
 }

@@ -25,6 +25,7 @@ namespace FilmDat.BL.Models.ListModels
             }
         }
 
-        public static IEqualityComparer<ReviewListModel> RatingTextReviewComparer { get; } = new RatingTextReviewEqualityComparer();
+        public static IEqualityComparer<ReviewListModel> RatingTextReviewComparer { get; } =
+            new RatingTextReviewEqualityComparer();
     }
 }

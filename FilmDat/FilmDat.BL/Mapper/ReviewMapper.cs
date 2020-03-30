@@ -8,7 +8,6 @@ namespace FilmDat.BL.Mapper
 {
     public static class ReviewMapper
     {
-
         public static ReviewListModel MapToListModel(ReviewEntity entity) =>
             entity == null
                 ? null
@@ -27,7 +26,7 @@ namespace FilmDat.BL.Mapper
                     NickName = entity.NickName,
                     Date = entity.Date,
                     Rating = entity.Rating,
-                    TextReview= entity.TextReview,
+                    TextReview = entity.TextReview,
                 };
 
         public static ReviewEntity MapToEntity(ReviewDetailModel detailModel, IEntityFactory entityFactory)

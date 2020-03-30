@@ -48,7 +48,7 @@ namespace FilmDat.DAL.Entities
                 hashCode.Add(obj.Id);
                 hashCode.Add(obj.OriginalName);
                 hashCode.Add(obj.CzechName);
-                hashCode.Add((int)obj.Genre);
+                hashCode.Add((int) obj.Genre);
                 hashCode.Add(obj.TitleFotoUrl);
                 hashCode.Add(obj.Country);
                 hashCode.Add(obj.Duration);
@@ -88,7 +88,7 @@ namespace FilmDat.DAL.Entities
                 hashCode.Add(obj.Id);
                 hashCode.Add(obj.OriginalName);
                 hashCode.Add(obj.CzechName);
-                hashCode.Add((int)obj.Genre);
+                hashCode.Add((int) obj.Genre);
                 hashCode.Add(obj.TitleFotoUrl);
                 hashCode.Add(obj.Country);
                 hashCode.Add(obj.Duration);

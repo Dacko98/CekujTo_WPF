@@ -4,9 +4,9 @@ using FilmDat.DAL.Seeds;
 
 namespace FilmDat.DAL
 {
-    public class FilmDatDbContext: DbContext
+    public class FilmDatDbContext : DbContext
     {
-        public FilmDatDbContext(DbContextOptions contextOptions):base(contextOptions)
+        public FilmDatDbContext(DbContextOptions contextOptions) : base(contextOptions)
         {
         }
 

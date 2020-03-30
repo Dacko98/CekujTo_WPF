@@ -24,7 +24,7 @@ namespace FilmDat.DAL.Factories
                     ?.Entity;
                 if (entity == null)
                 {
-                    entity = new TEntity { Id = id };
+                    entity = new TEntity {Id = id};
                     _changeTracker?.Context.Attach(entity);
                 }
             }
@@ -32,6 +32,7 @@ namespace FilmDat.DAL.Factories
             {
                 entity = new TEntity();
             }
+
             return entity;
         }
     }

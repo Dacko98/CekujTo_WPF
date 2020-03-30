@@ -26,7 +26,10 @@ namespace FilmDat.BL.Models.DetailModels
                 if (ReferenceEquals(x, null)) return false;
                 if (ReferenceEquals(y, null)) return false;
                 if (x.GetType() != y.GetType()) return false;
-                return x.OriginalName == y.OriginalName && x.CzechName == y.CzechName && x.Genre == y.Genre && x.TitleFotoUrl == y.TitleFotoUrl && x.Country == y.Country && x.Duration.Equals(y.Duration) && x.Description == y.Description && Equals(x.Actors, y.Actors) && Equals(x.Directors, y.Directors) && Equals(x.Reviews, y.Reviews);
+                return x.OriginalName == y.OriginalName && x.CzechName == y.CzechName && x.Genre == y.Genre &&
+                       x.TitleFotoUrl == y.TitleFotoUrl && x.Country == y.Country && x.Duration.Equals(y.Duration) &&
+                       x.Description == y.Description && Equals(x.Actors, y.Actors) &&
+                       Equals(x.Directors, y.Directors) && Equals(x.Reviews, y.Reviews);
             }
 
             public int GetHashCode(FilmDetailModel obj)
@@ -46,6 +49,7 @@ namespace FilmDat.BL.Models.DetailModels
             }
         }
 
-        public static IEqualityComparer<FilmDetailModel> FilmDetailModelComparer { get; } = new FilmDetailModelEqualityComparer();
+        public static IEqualityComparer<FilmDetailModel> FilmDetailModelComparer { get; } =
+            new FilmDetailModelEqualityComparer();
     }
 }
