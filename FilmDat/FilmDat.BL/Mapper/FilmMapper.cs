@@ -8,7 +8,7 @@ using FilmDat.DAL.Interfaces;
 
 namespace FilmDat.BL.Mapper
 {
-    internal static class FilmMapper
+    public static class FilmMapper
     {
         public static FilmListModel MapToListModel(FilmEntity entity) =>
             entity == null
@@ -32,29 +32,27 @@ namespace FilmDat.BL.Mapper
                     Country = entity.Country,
                     Duration = entity.Duration,
                     Description = entity.Description,
+
                     Actors = entity.Actors.Select(
-                        PersonEntity => new ActedInFilmDetailModel()
+                        PersonEntity => new PersonListModel()
                         {
                             Id = PersonEntity.Id,
-                            ActorId = PersonEntity.ActorId,
-                            FilmId = entity.Id,
                             FirstName = PersonEntity.Actor.FirstName,
                             LastName = PersonEntity.Actor.LastName
                         }).ToList(),
+
                     Directors = entity.Directors.Select(
-                        PersonEntity => new DirectedFilmDetailModel()
+                        PersonEntity => new PersonListModel()
                         {
                             Id = PersonEntity.Id,
-                            DirectorId = PersonEntity.DirectorId,
-                            FilmId = entity.Id,
                             FirstName = PersonEntity.Director.FirstName,
                             LastName = PersonEntity.Director.LastName
                         }).ToList(),
+
                     Reviews = entity.Reviews.Select(
                         ReviewEntity => new ReviewListModel()
                         {
                             Id = ReviewEntity.Id,
-                            FilmId = entity.Id,
                             Rating = ReviewEntity.Rating
                         }).ToList()
                 };
@@ -72,17 +70,9 @@ namespace FilmDat.BL.Mapper
             entity.Duration = detailModel.Duration;
             entity.Description = detailModel.Description;
 
-            entity.Reviews = detailModel.Reviews.Select(model =>
-            {
-                var ReviewEntity = entityFactory.Create<ReviewEntity>(model.Id);
-                ReviewEntity.FilmId = model.FilmId;
-                ReviewEntity.Rating = model.Rating;
-                ReviewEntity.TextReview = model.TextReview;
-                return ReviewEntity;
-            }).ToList();
-
+            entity.Reviews = detailModel.Reviews.Select(model => ReviewMapper.MapToEntity(model, entityFactory)).ToList();
             entity.Actors = detailModel.Actors.Select(model => ActedInFilmMapper.MapToEntity(model, entityFactory)).ToList();
-            entity.Directors = detailModel.Directors.Select(model => DirectedInFilmMapper.MapToEntity(model, entityFactory)).ToList();
+            entity.Directors = detailModel.Directors.Select(model => DirectedFilmMapper.MapToEntity(model, entityFactory)).ToList();
 
             return entity;
         }

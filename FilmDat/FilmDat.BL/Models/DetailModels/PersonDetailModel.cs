@@ -10,8 +10,8 @@ namespace FilmDat.BL.Models.DetailModels
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
         public string FotoUrl { get; set; }
-        public ICollection<ActedInFilmDetailModel> ActedInFilms { get; set; }
-        public ICollection<DirectedFilmDetailModel> DirectedFilms { get; set; }
+        public ICollection<FilmListModel> ActedInFilms { get; set; }
+        public ICollection<FilmListModel> DirectedFilms { get; set; }
 
         private sealed class PersonDetailModelEqualityComparer : IEqualityComparer<PersonDetailModel>
         {

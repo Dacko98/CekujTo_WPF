@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FilmDat.BL.Interfaces;
+﻿using FilmDat.BL.Interfaces;
 using FilmDat.BL.Mapper;
 using FilmDat.BL.Models.DetailModels;
 using FilmDat.BL.Models.ListModels;

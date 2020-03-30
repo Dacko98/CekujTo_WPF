@@ -15,7 +15,6 @@ namespace FilmDat.DAL.Tests
             var dbContextOptionsBuilder = new DbContextOptionsBuilder<FilmDatDbContext>();
             dbContextOptionsBuilder.UseInMemoryDatabase(_databaseName);
             return  new FilmDatDbContext(dbContextOptionsBuilder.Options);
-            
         }
     }
 }

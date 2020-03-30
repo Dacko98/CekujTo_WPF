@@ -14,8 +14,8 @@ namespace FilmDat.BL.Models.DetailModels
         public String Country { get; set; }
         public TimeSpan Duration { get; set; }
         public String Description { get; set; }
-        public ICollection<ActedInFilmDetailModel> Actors { get; set; }
-        public ICollection<DirectedFilmDetailModel> Directors { get; set; }
+        public ICollection<PersonListModel> Actors { get; set; }
+        public ICollection<PersonListModel> Directors { get; set; }
         public ICollection<ReviewListModel> Reviews { get; set; }
 
         private sealed class FilmDetailModelEqualityComparer : IEqualityComparer<FilmDetailModel>
