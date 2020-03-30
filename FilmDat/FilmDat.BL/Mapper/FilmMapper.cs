@@ -8,7 +8,7 @@ using FilmDat.DAL.Interfaces;
 
 namespace FilmDat.BL.Mapper
 {
-    internal static class FilmMapper
+    public static class FilmMapper
     {
         public static FilmListModel MapToListModel(FilmEntity entity) =>
             entity == null
