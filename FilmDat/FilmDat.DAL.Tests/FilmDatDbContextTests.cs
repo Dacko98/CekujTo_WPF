@@ -1,13 +1,9 @@
 using FilmDat.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using Xunit;
 using FilmDat.DAL.Enums;
-using FilmDat.DAL.Seeds;
-
 
 namespace FilmDat.DAL.Tests
 {
@@ -221,7 +217,6 @@ namespace FilmDat.DAL.Tests
                 .Single(i => i.Id == film.Id);
             Assert.Equal(film, fromDb, FilmEntity.FilmComparer);
         }
-
 
         public void Dispose() => _filmDatDbContext?.Dispose();
     }

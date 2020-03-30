@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using FilmDat.DAL.Interfaces;
 using System.Linq;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -26,7 +24,7 @@ namespace FilmDat.DAL.Factories
                     ?.Entity;
                 if (entity == null)
                 {
-                    entity = new TEntity { Id = id };
+                    entity = new TEntity {Id = id};
                     _changeTracker?.Context.Attach(entity);
                 }
             }
@@ -34,6 +32,7 @@ namespace FilmDat.DAL.Factories
             {
                 entity = new TEntity();
             }
+
             return entity;
         }
     }

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using FilmDat.DAL.Factories;
+
 namespace FilmDat.DAL.Tests
 {
     public class DbContextInMemoryFactory : IDbContextFactory
@@ -10,12 +11,12 @@ namespace FilmDat.DAL.Tests
         {
             _databaseName = databaseName;
         }
+
         public FilmDatDbContext CreateDbContext()
         {
             var dbContextOptionsBuilder = new DbContextOptionsBuilder<FilmDatDbContext>();
             dbContextOptionsBuilder.UseInMemoryDatabase(_databaseName);
-            return  new FilmDatDbContext(dbContextOptionsBuilder.Options);
-            
+            return new FilmDatDbContext(dbContextOptionsBuilder.Options);
         }
     }
 }

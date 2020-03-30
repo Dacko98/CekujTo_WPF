@@ -25,6 +25,7 @@ namespace FilmDat.BL.Models.ListModels
             }
         }
 
-        public static IEqualityComparer<PersonListModel> FirstNameLastNameComparer { get; } = new FirstNameLastNameEqualityComparer();
+        public static IEqualityComparer<PersonListModel> FirstNameLastNameComparer { get; } =
+            new FirstNameLastNameEqualityComparer();
     }
 }

@@ -1,33 +1,29 @@
 ﻿using FilmDat.BL.Factories;
-using FilmDat.BL.Models.DetailModels;
+using FilmDat.BL.Models.ListModels;
 using FilmDat.DAL.Entities;
 using FilmDat.DAL.Interfaces;
 
 namespace FilmDat.BL.Mapper
 {
-    internal static class ActedInFilmMapper
+    public static class ActedInFilmMapper
     {
-
-        public static ActedInFilmDetailModel MapToListModel(ActedInFilmEntity entity) =>
-            entity == null
-                ? null
-                : new ActedInFilmDetailModel()
-                {
-                    Id = entity.Id,
-                    ActorId  = entity.ActorId,
-                    FirstName = entity.Actor.FirstName,
-                    LastName = entity.Actor.LastName,
-                    FilmId = entity.FilmId,
-                    OriginalName = entity.Film.OriginalName
-                };
-
-        public static ActedInFilmEntity MapToEntity(ActedInFilmDetailModel detailModel, IEntityFactory entityFactory)
+        public static ActedInFilmEntity MapToEntity(PersonListModel model, IEntityFactory entityFactory)
         {
-            var entity = (entityFactory ??= new CreateNewEntityFactory()).Create<ActedInFilmEntity>(detailModel.Id);
+            var entity = (entityFactory ??= new CreateNewEntityFactory()).Create<ActedInFilmEntity>(model.Id);
 
-            entity.Id = detailModel.Id;
-            entity.FilmId = detailModel.FilmId;
-            entity.ActorId = detailModel.ActorId;
+            entity.Id = model.Id;
+            entity.Actor.FirstName = model.FirstName;
+            entity.Actor.LastName = model.LastName;
+
+            return entity;
+        }
+
+        public static ActedInFilmEntity MapToEntity(FilmListModel model, IEntityFactory entityFactory)
+        {
+            var entity = (entityFactory ??= new CreateNewEntityFactory()).Create<ActedInFilmEntity>(model.Id);
+
+            entity.Id = model.Id;
+            entity.Film.OriginalName = model.OriginalName;
 
             return entity;
         }

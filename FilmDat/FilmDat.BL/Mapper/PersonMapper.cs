@@ -29,26 +29,20 @@ namespace FilmDat.BL.Mapper
                     LastName = entity.LastName,
                     BirthDate = entity.BirthDate,
                     FotoUrl = entity.FotoUrl,
-                 
+
                     ActedInFilms = entity.ActedInFilms.Select(
-                        PersonEntity => new ActedInFilmDetailModel()
+                        FilmEntity => new FilmListModel()
                         {
-                            Id = PersonEntity.Id,
-                            ActorId = entity.Id,
-                            FilmId = PersonEntity.FilmId,
-                            FirstName = PersonEntity.Actor.FirstName,
-                            LastName = PersonEntity.Actor.LastName
+                            Id = FilmEntity.Id,
+                            OriginalName = FilmEntity.Film.OriginalName
                         }).ToList(),
+
                     DirectedFilms = entity.DirectedFilms.Select(
-                        PersonEntity => new DirectedFilmDetailModel()
+                        FilmEntity => new FilmListModel()
                         {
-                            Id = PersonEntity.Id,
-                            DirectorId = entity.Id,
-                            FilmId = PersonEntity.FilmId,
-                            FirstName = PersonEntity.Director.FirstName,
-                            LastName = PersonEntity.Director.LastName
+                            Id = FilmEntity.Id,
+                            OriginalName = FilmEntity.Film.OriginalName
                         }).ToList(),
-                    
                 };
 
         public static PersonEntity MapToEntity(PersonDetailModel detailModel, IEntityFactory entityFactory)
@@ -60,8 +54,11 @@ namespace FilmDat.BL.Mapper
             entity.LastName = detailModel.LastName;
             entity.BirthDate = detailModel.BirthDate;
             entity.FotoUrl = detailModel.FotoUrl;
-            entity.DirectedFilms = detailModel.DirectedFilms.Select(model => DirectedInFilmMapper.MapToEntity(model, entityFactory)).ToList();
-            entity.ActedInFilms = detailModel.ActedInFilms.Select(model => ActedInFilmMapper.MapToEntity(model, entityFactory)).ToList();
+
+            entity.DirectedFilms = detailModel.DirectedFilms
+                .Select(model => DirectedFilmMapper.MapToEntity(model, entityFactory)).ToList();
+            entity.ActedInFilms = detailModel.ActedInFilms
+                .Select(model => ActedInFilmMapper.MapToEntity(model, entityFactory)).ToList();
 
             return entity;
         }

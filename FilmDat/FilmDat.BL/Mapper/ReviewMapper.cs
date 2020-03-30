@@ -6,16 +6,14 @@ using FilmDat.DAL.Interfaces;
 
 namespace FilmDat.BL.Mapper
 {
-    internal static class ReviewMapper
+    public static class ReviewMapper
     {
-
         public static ReviewListModel MapToListModel(ReviewEntity entity) =>
             entity == null
                 ? null
                 : new ReviewListModel()
                 {
                     Id = entity.Id,
-                    FilmId = entity.FilmId,
                     Rating = entity.Rating
                 };
 
@@ -28,8 +26,7 @@ namespace FilmDat.BL.Mapper
                     NickName = entity.NickName,
                     Date = entity.Date,
                     Rating = entity.Rating,
-                    TextReview= entity.TextReview,
-                    OriginalName = new FilmListModel() { Id = entity.Film.Id, OriginalName = entity.Film.OriginalName }
+                    TextReview = entity.TextReview,
                 };
 
         public static ReviewEntity MapToEntity(ReviewDetailModel detailModel, IEntityFactory entityFactory)
@@ -41,7 +38,17 @@ namespace FilmDat.BL.Mapper
             entity.Rating = detailModel.Rating;
             entity.TextReview = detailModel.TextReview;
             entity.NickName = detailModel.TextReview;
-            entity.FilmId = detailModel.OriginalName.Id;
+
+            return entity;
+        }
+
+        public static ReviewEntity MapToEntity(ReviewListModel model, IEntityFactory entityFactory)
+        {
+            var entity = (entityFactory ??= new CreateNewEntityFactory()).Create<ReviewEntity>(model.Id);
+
+            entity.Id = model.Id;
+            entity.Rating = model.Rating;
+            entity.TextReview = model.TextReview;
 
             return entity;
         }

@@ -10,8 +10,8 @@ namespace FilmDat.BL.Models.DetailModels
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
         public string FotoUrl { get; set; }
-        public ICollection<ActedInFilmDetailModel> ActedInFilms { get; set; }
-        public ICollection<DirectedFilmDetailModel> DirectedFilms { get; set; }
+        public ICollection<FilmListModel> ActedInFilms { get; set; }
+        public ICollection<FilmListModel> DirectedFilms { get; set; }
 
         private sealed class PersonDetailModelEqualityComparer : IEqualityComparer<PersonDetailModel>
         {
@@ -21,15 +21,19 @@ namespace FilmDat.BL.Models.DetailModels
                 if (ReferenceEquals(x, null)) return false;
                 if (ReferenceEquals(y, null)) return false;
                 if (x.GetType() != y.GetType()) return false;
-                return x.FirstName == y.FirstName && x.LastName == y.LastName && x.BirthDate.Equals(y.BirthDate) && x.FotoUrl == y.FotoUrl && Equals(x.ActedInFilms, y.ActedInFilms) && Equals(x.DirectedFilms, y.DirectedFilms);
+                return x.FirstName == y.FirstName && x.LastName == y.LastName && x.BirthDate.Equals(y.BirthDate) &&
+                       x.FotoUrl == y.FotoUrl && Equals(x.ActedInFilms, y.ActedInFilms) &&
+                       Equals(x.DirectedFilms, y.DirectedFilms);
             }
 
             public int GetHashCode(PersonDetailModel obj)
             {
-                return HashCode.Combine(obj.FirstName, obj.LastName, obj.BirthDate, obj.FotoUrl, obj.ActedInFilms, obj.DirectedFilms);
+                return HashCode.Combine(obj.FirstName, obj.LastName, obj.BirthDate, obj.FotoUrl, obj.ActedInFilms,
+                    obj.DirectedFilms);
             }
         }
 
-        public static IEqualityComparer<PersonDetailModel> PersonDetailModelComparer { get; } = new PersonDetailModelEqualityComparer();
+        public static IEqualityComparer<PersonDetailModel> PersonDetailModelComparer { get; } =
+            new PersonDetailModelEqualityComparer();
     }
 }

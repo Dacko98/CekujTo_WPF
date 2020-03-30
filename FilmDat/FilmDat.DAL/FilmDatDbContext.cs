@@ -1,15 +1,12 @@
 ﻿using FilmDat.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using FilmDat.DAL.Seeds;
 
 namespace FilmDat.DAL
 {
-    public class FilmDatDbContext: DbContext
+    public class FilmDatDbContext : DbContext
     {
-        public FilmDatDbContext(DbContextOptions contextOptions):base(contextOptions)
+        public FilmDatDbContext(DbContextOptions contextOptions) : base(contextOptions)
         {
         }
 
@@ -25,7 +22,6 @@ namespace FilmDat.DAL
                 .HasIndex(af => new {af.FilmId, af.ActorId}).IsUnique();
             modelBuilder.Entity<DirectedFilmEntity>()
                 .HasIndex(df => new {df.FilmId, df.DirectorId}).IsUnique();
-
 
             modelBuilder.SeedPerson();
             modelBuilder.SeedFilm();

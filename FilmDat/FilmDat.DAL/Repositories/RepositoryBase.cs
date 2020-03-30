@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using FilmDat.DAL.Factories;
 using FilmDat.Common;
 using FilmDat.DAL.Interfaces;
@@ -12,9 +11,9 @@ using Microsoft.EntityFrameworkCore.Query;
 namespace FilmDat.DAL.Repositories
 {
     public class RepositoryBase<TEntity, TListModel, TDetailModel> : IRepository<TEntity, TListModel, TDetailModel>
-         where TEntity : class, IEntity, new()
-         where TListModel : IId, new()
-         where TDetailModel : IId, new()
+        where TEntity : class, IEntity, new()
+        where TListModel : IId, new()
+        where TDetailModel : IId, new()
     {
         protected readonly Func<TEntity, IEnumerable<IEntity>>[] CollectionsToBeSynchronized;
         protected readonly IDbContextFactory DbContextFactory;
@@ -45,7 +44,7 @@ namespace FilmDat.DAL.Repositories
 
         public void Delete(TDetailModel detailModel)
         {
-            Delete((Guid)detailModel.Id);
+            Delete((Guid) detailModel.Id);
         }
 
         public void Delete(Guid id)
@@ -93,6 +92,7 @@ namespace FilmDat.DAL.Repositories
         {
             Delete(dbContext, typeof(TEntity), id);
         }
+
         private void Delete(DbContext dbContext, Type entityType, Guid id)
         {
             dbContext.Remove(dbContext.Find(typeof(TEntity), id));
@@ -149,7 +149,5 @@ namespace FilmDat.DAL.Repositories
                 Console.WriteLine($"Entity: {entry.Entity.GetType().Name}, State: {entry.State.ToString()}");
             }
         }
-
-
     }
 }
