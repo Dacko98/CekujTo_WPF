@@ -27,7 +27,7 @@ namespace FilmDat.BL.Tests
         [Fact]
         public void Create_WithNonExistingItem_DoesNotThrow()
         {
-            var model = new PersonDetailModel
+            var model = new PersonDetailModel()
             {
                 FirstName = "Jan",
                 LastName = "Testovaci",
@@ -73,19 +73,17 @@ namespace FilmDat.BL.Tests
                 FotoUrl = "foto",
                 ActedInFilms =
                 {
-                    new ActedInFilmDetailModel
+                    new FilmListModel()
                     {
-                        LastName = "Stalone",
-                        FirstName = "Silvester",
+                        
                         OriginalName = "Rambo 5"
                     }
                 },
                 DirectedFilms =
                 {
-                    new DirectedFilmDetailModel
+                    new FilmListModel()
                     {
-                        LastName = "tesetr",
-                        FirstName = "Sa",
+                       
                         OriginalName = "Rambo 5"
                     }
                 }
