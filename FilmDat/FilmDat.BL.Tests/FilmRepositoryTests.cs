@@ -6,7 +6,6 @@ using FilmDat.BL.Mapper;
 using FilmDat.BL.Models.ListModels;
 using FilmDat.DAL.Enums;
 using FilmDat.DAL.Seeds;
-using Microsoft.EntityFrameworkCore;
 using Xunit;
 
 namespace FilmDat.BL.Tests
@@ -28,18 +27,29 @@ namespace FilmDat.BL.Tests
         [Fact]
         public void Create_WithNonExistingItem_DoesNotThrow()
         {
-            var daco = new FilmDetailModel
+            var model = new FilmDetailModel
             {
                 OriginalName = "The Avengers",
                 Country = "USA",
                 CzechName = "Avengers",
                 Description = "Marvelovka",
                 Genre = GenreEnum.SciFi,
-                TitleFotoUrl = "avangers"
-
+                TitleFotoUrl = "avangers",
+                Reviews =
+                {
+                    new ReviewListModel()
+                },
+                Actors =
+                {
+                    new PersonListModel()
+                },
+                Directors =
+                {
+                    new PersonListModel()
+                }
             };
-            var returndaco = _filmRepositorySUT.InsertOrUpdate(daco);
-            Assert.NotNull(returndaco);
+            var returnedModel = _filmRepositorySUT.InsertOrUpdate(model);
+            Assert.NotNull(returnedModel);
         }
 
         [Fact]
@@ -47,14 +57,14 @@ namespace FilmDat.BL.Tests
         {
             var film = _filmRepositorySUT.GetAll().Single(i => i.Id == Seed.GreaseFilm.Id);
 
-            Assert.Equal(FilmMapper.MapToListModel(Seed.GreaseFilm),film,FilmListModel.OriginalNameComparer);
+            Assert.Equal(FilmMapper.MapToListModel(Seed.GreaseFilm), film, FilmListModel.OriginalNameComparer);
         }
 
         [Fact]
         public void GetById_SeedFilm()
         {
             var film = _filmRepositorySUT.GetById(Seed.GreaseFilm.Id);
-            Assert.Equal(FilmMapper.MapToDetailModel(Seed.GreaseFilm), film,FilmDetailModel.FilmDetailModelComparer);
+            Assert.Equal(FilmMapper.MapToDetailModel(Seed.GreaseFilm), film, FilmDetailModel.FilmDetailModelComparer);
         }
 
         [Fact]
@@ -98,8 +108,9 @@ namespace FilmDat.BL.Tests
 
             using var dbxAssert = _dbContextFactory.CreateDbContext();
             var filmFromDb = dbxAssert.Films.Single(i => i.Id == film.Id);
-            Assert.Equal(film,FilmMapper.MapToDetailModel(filmFromDb),FilmDetailModel.FilmDetailModelComparer);
+            Assert.Equal(film, FilmMapper.MapToDetailModel(filmFromDb), FilmDetailModel.FilmDetailModelComparer);
         }
+
         public void Dispose()
         {
             using var dbx = _dbContextFactory.CreateDbContext();
