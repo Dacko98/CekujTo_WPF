@@ -37,7 +37,7 @@ namespace FilmDat.BL.Mapper
             entity.Date = detailModel.Date;
             entity.Rating = detailModel.Rating;
             entity.TextReview = detailModel.TextReview;
-            entity.NickName = detailModel.TextReview;
+            entity.NickName = detailModel.NickName;
 
             return entity;
         }
