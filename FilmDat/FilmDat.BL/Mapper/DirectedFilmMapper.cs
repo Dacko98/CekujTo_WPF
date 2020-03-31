@@ -13,6 +13,7 @@ namespace FilmDat.BL.Mapper
             var entity = (entityFactory ??= new CreateNewEntityFactory()).Create<DirectedFilmEntity>(model.Id);
 
             entity.Id = model.Id;
+            entity.Director = (entityFactory ??= new CreateNewEntityFactory()).Create<PersonEntity>(model.Id);
             entity.Director.FirstName = model.FirstName;
             entity.Director.LastName = model.LastName;
 
@@ -24,6 +25,7 @@ namespace FilmDat.BL.Mapper
             var entity = (entityFactory ??= new CreateNewEntityFactory()).Create<DirectedFilmEntity>(model.Id);
 
             entity.Id = model.Id;
+            entity.Film = (entityFactory ??= new CreateNewEntityFactory()).Create<FilmEntity>(model.Id);
             entity.Film.OriginalName = model.OriginalName;
 
             return entity;

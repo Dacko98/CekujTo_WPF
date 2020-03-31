@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using FilmDat.BL.Factories;
 using FilmDat.BL.Models.DetailModels;
 using FilmDat.BL.Models.ListModels;
@@ -13,7 +14,7 @@ namespace FilmDat.BL.Mapper
         public static FilmListModel MapToListModel(FilmEntity entity) =>
             entity == null
                 ? null
-                : new FilmListModel
+                : new FilmListModel()
                 {
                     Id = entity.Id,
                     OriginalName = entity.OriginalName
@@ -22,7 +23,7 @@ namespace FilmDat.BL.Mapper
         public static FilmDetailModel MapToDetailModel(FilmEntity entity) =>
             entity == null
                 ? null
-                : new FilmDetailModel
+                : new FilmDetailModel()
                 {
                     Id = entity.Id,
                     OriginalName = entity.OriginalName,

@@ -22,7 +22,7 @@ namespace FilmDat.BL.Mapper
         public static PersonDetailModel MapToDetailModel(PersonEntity entity) =>
             entity == null
                 ? null
-                : new PersonDetailModel
+                : new PersonDetailModel()
                 {
                     Id = entity.Id,
                     FirstName = entity.FirstName,

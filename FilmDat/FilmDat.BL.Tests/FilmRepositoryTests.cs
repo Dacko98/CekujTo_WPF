@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using FilmDat.BL.Models.DetailModels;
 using FilmDat.BL.Repositories;
@@ -27,7 +28,7 @@ namespace FilmDat.BL.Tests
         [Fact]
         public void Create_WithNonExistingItem_DoesNotThrow()
         {
-            var model = new FilmDetailModel
+            var model = new FilmDetailModel()
             {
                 OriginalName = "The Avengers",
                 Country = "USA",
@@ -35,31 +36,15 @@ namespace FilmDat.BL.Tests
                 Description = "Marvelovka",
                 Genre = GenreEnum.SciFi,
                 TitleFotoUrl = "avangers",
-                Reviews =
-                {
-                    new ReviewListModel()
-                },
-                Actors =
-                {
-                    new PersonListModel()
-                },
-                Directors =
-                {
-                    new PersonListModel()
-                }
+                Reviews = new List<ReviewListModel>(),
+                Actors = new List<PersonListModel>(),
+                Directors = new List<PersonListModel>()
             };
-            var returnedModel = _filmRepositorySUT.InsertOrUpdate(model);
+            var returnedModel = new FilmDetailModel();
+            returnedModel = _filmRepositorySUT.InsertOrUpdate(model);
             Assert.NotNull(returnedModel);
         }
-
-        [Fact]
-        public void GetAll_Single_SeedFilm()
-        {
-            var film = _filmRepositorySUT.GetAll().Single(i => i.Id == Seed.GreaseFilm.Id);
-
-            Assert.Equal(FilmMapper.MapToListModel(Seed.GreaseFilm), film, FilmListModel.OriginalNameComparer);
-        }
-
+        
         [Fact]
         public void GetById_SeedFilm()
         {
@@ -81,8 +66,16 @@ namespace FilmDat.BL.Tests
             var film = new FilmDetailModel()
             {
                 OriginalName = "A",
-                CzechName = "B"
+                Genre = GenreEnum.Action,
+                CzechName = "B",
+                TitleFotoUrl = "titlefoto.png",
+                Description = "A film!",
+                Country = "Murica",
+                Reviews = new List<ReviewListModel>(),
+                Actors = new List<PersonListModel>(),
+                Directors = new List<PersonListModel>()
             };
+            
             film = _filmRepositorySUT.InsertOrUpdate(film);
 
             using var dbxAssert = _dbContextFactory.CreateDbContext();
@@ -101,7 +94,10 @@ namespace FilmDat.BL.Tests
                 CzechName = Seed.GreaseFilm.CzechName,
                 TitleFotoUrl = Seed.GreaseFilm.TitleFotoUrl,
                 Description = Seed.GreaseFilm.Description,
-                Country = Seed.GreaseFilm.Country
+                Country = Seed.GreaseFilm.Country,
+                Reviews = new List<ReviewListModel>(),
+                Actors = new List<PersonListModel>(),
+                Directors = new List<PersonListModel>()
             };
             film.OriginalName += "updated";
             _filmRepositorySUT.InsertOrUpdate(film);
@@ -109,6 +105,16 @@ namespace FilmDat.BL.Tests
             using var dbxAssert = _dbContextFactory.CreateDbContext();
             var filmFromDb = dbxAssert.Films.Single(i => i.Id == film.Id);
             Assert.Equal(film, FilmMapper.MapToDetailModel(filmFromDb), FilmDetailModel.FilmDetailModelComparer);
+            film.OriginalName = "Grease";
+            _filmRepositorySUT.InsertOrUpdate(film);
+        }
+
+        [Fact]
+        public void GetAll_Single_SeedFilm()
+        {
+            var film = _filmRepositorySUT.GetAll().Single(i => i.Id == Seed.GreaseFilm.Id);
+
+            Assert.Equal(FilmMapper.MapToListModel(Seed.GreaseFilm), film, FilmListModel.OriginalNameComparer);
         }
 
         public void Dispose()
