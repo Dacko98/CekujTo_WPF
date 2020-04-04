@@ -1,4 +1,4 @@
-namespace FilmDat.DAL.Factories
+namespace FilmDat.DAL.Interfaces
 {
     public interface IDbContextFactory
     {

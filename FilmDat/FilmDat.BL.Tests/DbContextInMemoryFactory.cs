@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using FilmDat.DAL.Factories;
 using FilmDat.DAL;
+using FilmDat.DAL.Interfaces;
 
 namespace FilmDat.BL.Tests
 {
