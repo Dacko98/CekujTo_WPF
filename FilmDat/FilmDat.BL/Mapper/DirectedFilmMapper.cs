@@ -2,7 +2,6 @@
 using FilmDat.BL.Models.ListModels;
 using FilmDat.DAL.Entities;
 using FilmDat.DAL.Interfaces;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace FilmDat.BL.Mapper
 {
@@ -13,9 +12,9 @@ namespace FilmDat.BL.Mapper
             var entity = (entityFactory ??= new CreateNewEntityFactory()).Create<DirectedFilmEntity>(model.Id);
 
             entity.Id = model.Id;
-            entity.Director = (entityFactory ??= new CreateNewEntityFactory()).Create<PersonEntity>(model.Id);
+            /*entity.Director = (entityFactory ??= new CreateNewEntityFactory()).Create<PersonEntity>(model.Id);
             entity.Director.FirstName = model.FirstName;
-            entity.Director.LastName = model.LastName;
+            entity.Director.LastName = model.LastName;*/
 
             return entity;
         }
@@ -25,8 +24,8 @@ namespace FilmDat.BL.Mapper
             var entity = (entityFactory ??= new CreateNewEntityFactory()).Create<DirectedFilmEntity>(model.Id);
 
             entity.Id = model.Id;
-            entity.Film = (entityFactory ??= new CreateNewEntityFactory()).Create<FilmEntity>(model.Id);
-            entity.Film.OriginalName = model.OriginalName;
+            /*entity.Film = (entityFactory ??= new CreateNewEntityFactory()).Create<FilmEntity>(model.Id);
+            entity.Film.OriginalName = model.OriginalName;*/
 
             return entity;
         }

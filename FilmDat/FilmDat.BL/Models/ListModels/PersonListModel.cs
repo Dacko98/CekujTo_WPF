@@ -8,7 +8,7 @@ namespace FilmDat.BL.Models.ListModels
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        private sealed class FirstNameLastNameEqualityComparer : IEqualityComparer<PersonListModel>
+        private sealed class IdFirstNameLastNameEqualityComparer : IEqualityComparer<PersonListModel>
         {
             public bool Equals(PersonListModel x, PersonListModel y)
             {
@@ -16,16 +16,16 @@ namespace FilmDat.BL.Models.ListModels
                 if (ReferenceEquals(x, null)) return false;
                 if (ReferenceEquals(y, null)) return false;
                 if (x.GetType() != y.GetType()) return false;
-                return x.FirstName == y.FirstName && x.LastName == y.LastName;
+                return x.Id.Equals(y.Id) && x.FirstName == y.FirstName && x.LastName == y.LastName;
             }
 
             public int GetHashCode(PersonListModel obj)
             {
-                return HashCode.Combine(obj.FirstName, obj.LastName);
+                return HashCode.Combine(obj.Id, obj.FirstName, obj.LastName);
             }
         }
 
-        public static IEqualityComparer<PersonListModel> FirstNameLastNameComparer { get; } =
-            new FirstNameLastNameEqualityComparer();
+        public static IEqualityComparer<PersonListModel> IdFirstNameLastNameComparer { get; } =
+            new IdFirstNameLastNameEqualityComparer();
     }
 }

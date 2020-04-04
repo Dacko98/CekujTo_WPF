@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using FilmDat.BL.Mapper;
 using FilmDat.BL.Models.DetailModels;
 using FilmDat.BL.Models.ListModels;
@@ -29,36 +28,68 @@ namespace FilmDat.BL.Tests
         {
             var model = new PersonDetailModel()
             {
+                Id = Guid.NewGuid(),
                 FirstName = "Jan",
                 LastName = "Testovaci",
                 BirthDate = new DateTime(1979, 10, 27),
                 FotoUrl = "fotka",
-                ActedInFilms = { },
-                DirectedFilms = { }
+                DirectedFilms = new List<FilmListModel>(),
+                ActedInFilms = new List<FilmListModel>()
             };
             var returnmodel = _personRepositorySUT.InsertOrUpdate(model);
             Assert.NotNull(returnmodel);
         }
 
         [Fact]
+        public void Create_WithNonExistingItem_DoesNotThrowAndEqualsCreated()
+        {
+            var person = new PersonDetailModel()
+            {
+                Id = Guid.NewGuid(),
+                FirstName = "Jan",
+                LastName = "b",
+                BirthDate = new DateTime(1979, 10, 27),
+                FotoUrl = "a",
+                ActedInFilms = new List<FilmListModel>(),
+                DirectedFilms = new List<FilmListModel>()
+            };
+            var person2 = _personRepositorySUT.InsertOrUpdate(person);
+
+            Assert.Equal(person, person2, PersonDetailModel.PersonDetailModelComparer);
+            Assert.Equal(person.ActedInFilms, person2.ActedInFilms,
+                FilmListModel.IdOriginalNameComparer);
+            Assert.Equal(person.DirectedFilms, person2.DirectedFilms,
+                FilmListModel.IdOriginalNameComparer);
+        }
+
+        [Fact]
         public void GetAll_Single_SeedPerson()
         {
-            var person = _personRepositorySUT.GetAll().Single(i => i.Id == Seed.JohnTravolta.Id);
-            Assert.Equal(PersonMapper.MapToListModel(Seed.JohnTravolta),person,PersonListModel.FirstNameLastNameComparer);
+            var person = _personRepositorySUT.GetAll().Single(i => i.Id == Seed.MatthewMcConaughey.Id);
+
+            Assert.Equal(PersonMapper.MapToListModel(Seed.MatthewMcConaughey), person,
+                PersonListModel.IdFirstNameLastNameComparer);
         }
 
         [Fact]
         public void GetById_SeededPerson()
         {
-            var person = _personRepositorySUT.GetById(Seed.JohnTravolta.Id);
-            Assert.Equal(PersonMapper.MapToDetailModel(Seed.JohnTravolta),person,PersonDetailModel.PersonDetailModelComparer);
+            var person2 = _personRepositorySUT.GetById(Seed.JohnTravolta.Id);
+            var person = PersonMapper.MapToDetailModel(Seed.JohnTravolta);
+
+            Assert.Equal(person, person2, PersonDetailModel.PersonDetailModelComparer);
+            Assert.Equal(person.ActedInFilms, person2.ActedInFilms,
+                FilmListModel.IdOriginalNameComparer);
+            Assert.Equal(person.DirectedFilms, person2.DirectedFilms,
+                FilmListModel.IdOriginalNameComparer);
         }
 
         [Fact]
-        public void SeededPerosn_DeleteById_Deleted()
+        public void SeededPerson_DeleteById_Deleted()
         {
             _personRepositorySUT.Delete(Seed.JohnTravolta.Id);
             using var dbxAssert = _dbContextFactory.CreateDbContext();
+
             Assert.False(dbxAssert.Persons.Any(i => i.Id == Seed.JohnTravolta.Id));
         }
 
@@ -67,31 +98,35 @@ namespace FilmDat.BL.Tests
         {
             var person = new PersonDetailModel()
             {
+                Id = Guid.Parse("ddbcaf4c-b415-4681-a844-606db16682bf"),
                 FirstName = "test",
                 LastName = "testovaci",
                 BirthDate = new DateTime(1989, 12, 12),
                 FotoUrl = "foto",
-                ActedInFilms =
-                {
-                    new FilmListModel()
+                ActedInFilms = new List<FilmListModel>()
+                /*{
+                    new ActedInFilmDetailModel()
                     {
-                        
+                        //Id = Guid.NewGuid(),
+                        //ActorId = Guid.Parse("1aaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"),
+                        FirstName = "test",
+                        LastName = "testovaci",
+                        //FilmId = Guid.NewGuid(),
                         OriginalName = "Rambo 5"
                     }
-                },
-                DirectedFilms =
-                {
-                    new FilmListModel()
-                    {
-                       
-                        OriginalName = "Rambo 5"
-                    }
-                }
+                }*/,
+                DirectedFilms = new List<FilmListModel>()
             };
             person = _personRepositorySUT.InsertOrUpdate(person);
             using var dbxAssert = _dbContextFactory.CreateDbContext();
             var personFromDb = dbxAssert.Persons.Single(i => i.Id == person.Id);
-            Assert.Equal(person,PersonMapper.MapToDetailModel(personFromDb),PersonDetailModel.PersonDetailModelComparer);
+            var person2 = PersonMapper.MapToDetailModel(personFromDb);
+
+            Assert.Equal(person, person2, PersonDetailModel.PersonDetailModelComparer);
+            Assert.Equal(person.ActedInFilms, person2.ActedInFilms,
+                FilmListModel.IdOriginalNameComparer);
+            Assert.Equal(person.DirectedFilms, person2.DirectedFilms,
+                FilmListModel.IdOriginalNameComparer);
         }
 
         [Fact]
@@ -99,9 +134,20 @@ namespace FilmDat.BL.Tests
         {
             var person = new PersonDetailModel()
             {
-                Id = Seed.JohnTravolta.Id,
-                FirstName = Seed.JohnTravolta.FirstName,
-                LastName = Seed.JohnTravolta.FirstName,
+                Id = Seed.ChristopherNolan.Id,
+                FirstName = Seed.ChristopherNolan.FirstName,
+                LastName = Seed.ChristopherNolan.LastName,
+                BirthDate = Seed.ChristopherNolan.BirthDate,
+                FotoUrl = Seed.ChristopherNolan.FotoUrl,
+                ActedInFilms = new List<FilmListModel>(),
+                DirectedFilms = new List<FilmListModel>()
+                {
+                    new FilmListModel()
+                    {
+                        Id = Seed.ChristopherNolan.DirectedFilms.Select(i => i.Id).FirstOrDefault(),
+                        OriginalName = Seed.ChristopherNolan.DirectedFilms.Select(i => i.Film.OriginalName).FirstOrDefault()
+                    }
+                }
             };
             person.FirstName += "updated";
             person.LastName += "updated";
@@ -109,9 +155,14 @@ namespace FilmDat.BL.Tests
             _personRepositorySUT.InsertOrUpdate(person);
             using var dbxAssert = _dbContextFactory.CreateDbContext();
             var personFromDb = dbxAssert.Persons.Single(i => i.Id == person.Id);
-            Assert.Equal(person, PersonMapper.MapToDetailModel(personFromDb),PersonDetailModel.PersonDetailModelComparer);
+            var person2 = PersonMapper.MapToDetailModel(personFromDb);
+
+            Assert.Equal(person, person2, PersonDetailModel.PersonDetailModelComparer);
+            Assert.Equal(person.ActedInFilms, person2.ActedInFilms,
+                FilmListModel.IdOriginalNameComparer);
+            Assert.Equal(person.DirectedFilms, person2.DirectedFilms,
+                FilmListModel.IdOriginalNameComparer);
         }
-        
 
         public void Dispose()
         {

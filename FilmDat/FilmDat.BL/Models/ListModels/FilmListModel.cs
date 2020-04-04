@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace FilmDat.BL.Models.ListModels
 {
@@ -6,7 +7,7 @@ namespace FilmDat.BL.Models.ListModels
     {
         public string OriginalName { get; set; }
 
-        private sealed class OriginalNameEqualityComparer : IEqualityComparer<FilmListModel>
+        private sealed class IdOriginalNameEqualityComparer : IEqualityComparer<FilmListModel>
         {
             public bool Equals(FilmListModel x, FilmListModel y)
             {
@@ -14,16 +15,16 @@ namespace FilmDat.BL.Models.ListModels
                 if (ReferenceEquals(x, null)) return false;
                 if (ReferenceEquals(y, null)) return false;
                 if (x.GetType() != y.GetType()) return false;
-                return x.OriginalName == y.OriginalName;
+                return x.Id.Equals(y.Id) && x.OriginalName == y.OriginalName;
             }
 
             public int GetHashCode(FilmListModel obj)
             {
-                return (obj.OriginalName != null ? obj.OriginalName.GetHashCode() : 0);
+                return HashCode.Combine(obj.Id, obj.OriginalName);
             }
         }
 
-        public static IEqualityComparer<FilmListModel> OriginalNameComparer { get; } =
-            new OriginalNameEqualityComparer();
+        public static IEqualityComparer<FilmListModel> IdOriginalNameComparer { get; } =
+            new IdOriginalNameEqualityComparer();
     }
 }

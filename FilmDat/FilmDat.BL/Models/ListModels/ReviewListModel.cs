@@ -8,7 +8,7 @@ namespace FilmDat.BL.Models.ListModels
         public uint Rating { get; set; }
         public String TextReview { get; set; }
 
-        private sealed class RatingTextReviewEqualityComparer : IEqualityComparer<ReviewListModel>
+        private sealed class IdRatingTextReviewEqualityComparer : IEqualityComparer<ReviewListModel>
         {
             public bool Equals(ReviewListModel x, ReviewListModel y)
             {
@@ -16,16 +16,16 @@ namespace FilmDat.BL.Models.ListModels
                 if (ReferenceEquals(x, null)) return false;
                 if (ReferenceEquals(y, null)) return false;
                 if (x.GetType() != y.GetType()) return false;
-                return x.Rating == y.Rating && x.TextReview == y.TextReview;
+                return x.Id.Equals(y.Id) && x.Rating == y.Rating && x.TextReview == y.TextReview;
             }
 
             public int GetHashCode(ReviewListModel obj)
             {
-                return HashCode.Combine(obj.Rating, obj.TextReview);
+                return HashCode.Combine(obj.Id, obj.Rating, obj.TextReview);
             }
         }
 
-        public static IEqualityComparer<ReviewListModel> RatingTextReviewComparer { get; } =
-            new RatingTextReviewEqualityComparer();
+        public static IEqualityComparer<ReviewListModel> IdRatingTextReviewComparer { get; } =
+            new IdRatingTextReviewEqualityComparer();
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Text;
-using FilmDat.DAL;
+﻿using FilmDat.DAL;
 using FilmDat.DAL.Factories;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,9 +12,9 @@ namespace FilmDat.BL.Factories
             var dbContextOptionsBuilder = new DbContextOptionsBuilder<FilmDatDbContext>();
             dbContextOptionsBuilder.UseSqlServer(
                 @"Data Source = (LocalDB)\MSSQLLocalDB;
-                Initial Catalog = FilmDat;
+                Initial Catalog = FilmDat2;
                 MultipleActiveResultSets = True;
-                Integrated Security = True; ");
+                Integrated Security = True;");
             return new FilmDatDbContext(dbContextOptionsBuilder.Options);
         }
     }

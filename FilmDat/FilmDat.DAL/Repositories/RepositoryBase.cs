@@ -70,8 +70,15 @@ namespace FilmDat.DAL.Repositories
 #if DEBUG
             DisplayStates(dbContext.ChangeTracker.Entries());
 #endif
-
-            dbContext.SaveChanges();
+            try
+            {
+                dbContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+                dbContext.Add<TEntity>(entity);
+                dbContext.SaveChanges();
+            }
 
             return MapDetailModel(entity);
         }

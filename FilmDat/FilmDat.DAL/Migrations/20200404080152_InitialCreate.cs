@@ -63,7 +63,7 @@ namespace FilmDat.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ActedInFilmEntities",
+                name: "ActedInFilms",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -72,15 +72,15 @@ namespace FilmDat.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ActedInFilmEntities", x => x.Id);
+                    table.PrimaryKey("PK_ActedInFilms", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ActedInFilmEntities_Persons_ActorId",
+                        name: "FK_ActedInFilms_Persons_ActorId",
                         column: x => x.ActorId,
                         principalTable: "Persons",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ActedInFilmEntities_Films_FilmId",
+                        name: "FK_ActedInFilms_Films_FilmId",
                         column: x => x.FilmId,
                         principalTable: "Films",
                         principalColumn: "Id",
@@ -88,7 +88,7 @@ namespace FilmDat.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DirectedFilmEntities",
+                name: "DirectedFilms",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -97,15 +97,15 @@ namespace FilmDat.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DirectedFilmEntities", x => x.Id);
+                    table.PrimaryKey("PK_DirectedFilms", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DirectedFilmEntities_Persons_DirectorId",
+                        name: "FK_DirectedFilms_Persons_DirectorId",
                         column: x => x.DirectorId,
                         principalTable: "Persons",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DirectedFilmEntities_Films_FilmId",
+                        name: "FK_DirectedFilms_Films_FilmId",
                         column: x => x.FilmId,
                         principalTable: "Films",
                         principalColumn: "Id",
@@ -115,52 +115,65 @@ namespace FilmDat.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "Films",
                 columns: new[] { "Id", "Country", "CzechName", "Description", "Duration", "Genre", "OriginalName", "TitleFotoUrl" },
-                values: new object[] { new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c"), "USA", "Pomada", "Romanticky muzikal", new TimeSpan(0, 2, 0, 0, 0), 7, "Grease", "pomada.jpg" });
+                values: new object[,]
+                {
+                    { new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c"), "USA", "Pomada", "Romanticky muzikal", new TimeSpan(0, 2, 0, 0, 0), 7, "Grease", "pomada.jpg" },
+                    { new Guid("16d3e5e1-a52a-4fbc-ac16-305491fe0b8e"), "USA", "Intergalakticky", "Scifi mindfuck...", new TimeSpan(0, 2, 0, 0, 0), 8, "Interstellar", "gargantua.jpg" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Persons",
                 columns: new[] { "Id", "BirthDate", "FirstName", "FotoUrl", "LastName" },
-                values: new object[] { new Guid("e1e20085-1ce4-4612-be57-285b8c76d76a"), new DateTime(1972, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "John", "johntravolta.jpg", "Travolta" });
+                values: new object[,]
+                {
+                    { new Guid("e1e20085-1ce4-4612-be57-285b8c76d76a"), new DateTime(1972, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "John", "johntravolta.jpg", "Travolta" },
+                    { new Guid("6d372469-af50-4cfe-9582-8789bf598b2b"), new DateTime(1972, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Randal", "randalkleiser.jpg", "Kleiser" },
+                    { new Guid("0a816848-99a5-4aae-8449-487d0847998a"), new DateTime(1979, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Matthew", "mato.jpg", "McConaughey" },
+                    { new Guid("0ae10491-658f-4fa8-860b-215ebb29cba2"), new DateTime(1970, 7, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "Christopher", "chris.jpg", "Nolan" }
+                });
 
             migrationBuilder.InsertData(
-                table: "Persons",
-                columns: new[] { "Id", "BirthDate", "FirstName", "FotoUrl", "LastName" },
-                values: new object[] { new Guid("6d372469-af50-4cfe-9582-8789bf598b2b"), new DateTime(1972, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Randal", "randalklieser.jpg", "Kleiser" });
-
-            migrationBuilder.InsertData(
-                table: "ActedInFilmEntities",
+                table: "ActedInFilms",
                 columns: new[] { "Id", "ActorId", "FilmId" },
-                values: new object[] { new Guid("501744f2-4fc1-494b-8b84-5fecb9f7903d"), new Guid("e1e20085-1ce4-4612-be57-285b8c76d76a"), new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c") });
+                values: new object[,]
+                {
+                    { new Guid("501744f2-4fc1-494b-8b84-5fecb9f7903d"), new Guid("e1e20085-1ce4-4612-be57-285b8c76d76a"), new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c") },
+                    { new Guid("a81ae9bd-3a1d-4612-b27e-a6a3d5cbaf9b"), new Guid("0a816848-99a5-4aae-8449-487d0847998a"), new Guid("16d3e5e1-a52a-4fbc-ac16-305491fe0b8e") }
+                });
 
             migrationBuilder.InsertData(
-                table: "DirectedFilmEntities",
+                table: "DirectedFilms",
                 columns: new[] { "Id", "DirectorId", "FilmId" },
-                values: new object[] { new Guid("75cb065e-643a-4b6f-807f-b3add4cf0eca"), new Guid("6d372469-af50-4cfe-9582-8789bf598b2b"), new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c") });
+                values: new object[,]
+                {
+                    { new Guid("75cb065e-643a-4b6f-807f-b3add4cf0eca"), new Guid("6d372469-af50-4cfe-9582-8789bf598b2b"), new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c") },
+                    { new Guid("5a4d3189-5daa-420e-9360-1146505a3d4d"), new Guid("0ae10491-658f-4fa8-860b-215ebb29cba2"), new Guid("16d3e5e1-a52a-4fbc-ac16-305491fe0b8e") }
+                });
 
             migrationBuilder.InsertData(
                 table: "Reviews",
                 columns: new[] { "Id", "Date", "FilmId", "NickName", "Rating", "TextReview" },
-                values: new object[] { new Guid("585b8ad0-aa06-49dd-94fd-8ab6c93f7e57"), new DateTime(2013, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c"), "Alan232", 82L, "Skvely film plny tanca a zabavy" });
+                values: new object[] { new Guid("585b8ad0-aa06-49dd-94fd-8ab6c93f7e57"), new DateTime(2013, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c"), "Alan232", 82L, "Skvely film plny tanca a zabavy." });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ActedInFilmEntities_ActorId",
-                table: "ActedInFilmEntities",
+                name: "IX_ActedInFilms_ActorId",
+                table: "ActedInFilms",
                 column: "ActorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ActedInFilmEntities_FilmId_ActorId",
-                table: "ActedInFilmEntities",
+                name: "IX_ActedInFilms_FilmId_ActorId",
+                table: "ActedInFilms",
                 columns: new[] { "FilmId", "ActorId" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_DirectedFilmEntities_DirectorId",
-                table: "DirectedFilmEntities",
+                name: "IX_DirectedFilms_DirectorId",
+                table: "DirectedFilms",
                 column: "DirectorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DirectedFilmEntities_FilmId_DirectorId",
-                table: "DirectedFilmEntities",
+                name: "IX_DirectedFilms_FilmId_DirectorId",
+                table: "DirectedFilms",
                 columns: new[] { "FilmId", "DirectorId" },
                 unique: true);
 
@@ -173,10 +186,10 @@ namespace FilmDat.DAL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ActedInFilmEntities");
+                name: "ActedInFilms");
 
             migrationBuilder.DropTable(
-                name: "DirectedFilmEntities");
+                name: "DirectedFilms");
 
             migrationBuilder.DropTable(
                 name: "Reviews");

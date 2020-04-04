@@ -18,13 +18,13 @@ namespace FilmDat.BL.Models.DetailModels
                 if (ReferenceEquals(x, null)) return false;
                 if (ReferenceEquals(y, null)) return false;
                 if (x.GetType() != y.GetType()) return false;
-                return x.NickName == y.NickName && x.Date.Equals(y.Date) && x.Rating == y.Rating &&
+                return x.Id.Equals(y.Id) && x.NickName == y.NickName && x.Date.Equals(y.Date) && x.Rating == y.Rating &&
                        x.TextReview == y.TextReview;
             }
 
             public int GetHashCode(ReviewDetailModel obj)
             {
-                return HashCode.Combine(obj.NickName, obj.Date, obj.Rating, obj.TextReview);
+                return HashCode.Combine(obj.Id, obj.NickName, obj.Date, obj.Rating, obj.TextReview);
             }
         }
 

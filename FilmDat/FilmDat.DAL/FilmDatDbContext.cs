@@ -13,22 +13,25 @@ namespace FilmDat.DAL
         public DbSet<FilmEntity> Films { get; set; }
         public DbSet<ReviewEntity> Reviews { get; set; }
         public DbSet<PersonEntity> Persons { get; set; }
-        public DbSet<ActedInFilmEntity> ActedInFilmEntities { get; set; }
-        public DbSet<DirectedFilmEntity> DirectedFilmEntities { get; set; }
+        public DbSet<ActedInFilmEntity> ActedInFilms { get; set; }
+        public DbSet<DirectedFilmEntity> DirectedFilms { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<FilmEntity>()
+                .HasMany(r => r.Reviews)
+                .WithOne(f => f.Film)
+                .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<ActedInFilmEntity>()
-                .HasIndex(af => new {af.FilmId, af.ActorId}).IsUnique();
+                .HasIndex(af => new { af.FilmId, af.ActorId }).IsUnique();
             modelBuilder.Entity<DirectedFilmEntity>()
-                .HasIndex(df => new {df.FilmId, df.DirectorId}).IsUnique();
+                .HasIndex(df => new { df.FilmId, df.DirectorId }).IsUnique();
 
             modelBuilder.SeedPerson();
             modelBuilder.SeedFilm();
             modelBuilder.SeedReview();
             modelBuilder.SeedActedInFilm();
             modelBuilder.SeedDirectedFilm();
-            base.OnModelCreating(modelBuilder);
         }
     }
 }

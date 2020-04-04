@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FilmDat.DAL.Migrations
 {
     [DbContext(typeof(FilmDatDbContext))]
-    [Migration("20200330183640_InitialCreate")]
+    [Migration("20200404080152_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.2")
+                .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -40,7 +40,7 @@ namespace FilmDat.DAL.Migrations
                     b.HasIndex("FilmId", "ActorId")
                         .IsUnique();
 
-                    b.ToTable("ActedInFilmEntities");
+                    b.ToTable("ActedInFilms");
 
                     b.HasData(
                         new
@@ -48,6 +48,12 @@ namespace FilmDat.DAL.Migrations
                             Id = new Guid("501744f2-4fc1-494b-8b84-5fecb9f7903d"),
                             ActorId = new Guid("e1e20085-1ce4-4612-be57-285b8c76d76a"),
                             FilmId = new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c")
+                        },
+                        new
+                        {
+                            Id = new Guid("a81ae9bd-3a1d-4612-b27e-a6a3d5cbaf9b"),
+                            ActorId = new Guid("0a816848-99a5-4aae-8449-487d0847998a"),
+                            FilmId = new Guid("16d3e5e1-a52a-4fbc-ac16-305491fe0b8e")
                         });
                 });
 
@@ -70,7 +76,7 @@ namespace FilmDat.DAL.Migrations
                     b.HasIndex("FilmId", "DirectorId")
                         .IsUnique();
 
-                    b.ToTable("DirectedFilmEntities");
+                    b.ToTable("DirectedFilms");
 
                     b.HasData(
                         new
@@ -78,6 +84,12 @@ namespace FilmDat.DAL.Migrations
                             Id = new Guid("75cb065e-643a-4b6f-807f-b3add4cf0eca"),
                             DirectorId = new Guid("6d372469-af50-4cfe-9582-8789bf598b2b"),
                             FilmId = new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c")
+                        },
+                        new
+                        {
+                            Id = new Guid("5a4d3189-5daa-420e-9360-1146505a3d4d"),
+                            DirectorId = new Guid("0ae10491-658f-4fa8-860b-215ebb29cba2"),
+                            FilmId = new Guid("16d3e5e1-a52a-4fbc-ac16-305491fe0b8e")
                         });
                 });
 
@@ -123,6 +135,17 @@ namespace FilmDat.DAL.Migrations
                             Genre = 7,
                             OriginalName = "Grease",
                             TitleFotoUrl = "pomada.jpg"
+                        },
+                        new
+                        {
+                            Id = new Guid("16d3e5e1-a52a-4fbc-ac16-305491fe0b8e"),
+                            Country = "USA",
+                            CzechName = "Intergalakticky",
+                            Description = "Scifi mindfuck...",
+                            Duration = new TimeSpan(0, 2, 0, 0, 0),
+                            Genre = 8,
+                            OriginalName = "Interstellar",
+                            TitleFotoUrl = "gargantua.jpg"
                         });
                 });
 
@@ -162,8 +185,24 @@ namespace FilmDat.DAL.Migrations
                             Id = new Guid("6d372469-af50-4cfe-9582-8789bf598b2b"),
                             BirthDate = new DateTime(1972, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Randal",
-                            FotoUrl = "randalklieser.jpg",
+                            FotoUrl = "randalkleiser.jpg",
                             LastName = "Kleiser"
+                        },
+                        new
+                        {
+                            Id = new Guid("0a816848-99a5-4aae-8449-487d0847998a"),
+                            BirthDate = new DateTime(1979, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FirstName = "Matthew",
+                            FotoUrl = "mato.jpg",
+                            LastName = "McConaughey"
+                        },
+                        new
+                        {
+                            Id = new Guid("0ae10491-658f-4fa8-860b-215ebb29cba2"),
+                            BirthDate = new DateTime(1970, 7, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FirstName = "Christopher",
+                            FotoUrl = "chris.jpg",
+                            LastName = "Nolan"
                         });
                 });
 
@@ -202,7 +241,7 @@ namespace FilmDat.DAL.Migrations
                             FilmId = new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c"),
                             NickName = "Alan232",
                             Rating = 82L,
-                            TextReview = "Skvely film plny tanca a zabavy"
+                            TextReview = "Skvely film plny tanca a zabavy."
                         });
                 });
 

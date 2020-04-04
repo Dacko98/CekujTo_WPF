@@ -19,6 +19,39 @@ namespace FilmDat.DAL.Seeds
             ActedInFilms = new List<ActedInFilmEntity>()
         };
 
+        public static readonly PersonEntity RandalKleiser = new PersonEntity()
+        {
+            Id = Guid.Parse("6d372469-af50-4cfe-9582-8789bf598b2b"),
+            FirstName = "Randal",
+            LastName = "Kleiser",
+            BirthDate = new DateTime(1972, 11, 12),
+            FotoUrl = "randalkleiser.jpg",
+            DirectedFilms = new List<DirectedFilmEntity>(),
+            ActedInFilms = new List<ActedInFilmEntity>()
+        };
+
+        public static readonly PersonEntity MatthewMcConaughey = new PersonEntity()
+        {
+            Id = Guid.Parse("0a816848-99a5-4aae-8449-487d0847998a"),
+            FirstName = "Matthew",
+            LastName = "McConaughey",
+            BirthDate = new DateTime(1979, 11, 4),
+            FotoUrl = "mato.jpg",
+            DirectedFilms = new List<DirectedFilmEntity>(),
+            ActedInFilms = new List<ActedInFilmEntity>()
+        };
+
+        public static readonly PersonEntity ChristopherNolan = new PersonEntity()
+        {
+            Id = Guid.Parse("0ae10491-658f-4fa8-860b-215ebb29cba2"),
+            FirstName = "Christopher",
+            LastName = "Nolan",
+            BirthDate = new DateTime(1970, 7, 30),
+            FotoUrl = "chris.jpg",
+            DirectedFilms = new List<DirectedFilmEntity>(),
+            ActedInFilms = new List<ActedInFilmEntity>()
+        };
+
         public static readonly FilmEntity GreaseFilm = new FilmEntity()
         {
             Id = Guid.Parse("088e40b8-63f6-4089-bfa9-4146e36e888c"),
@@ -34,29 +67,33 @@ namespace FilmDat.DAL.Seeds
             Actors = new List<ActedInFilmEntity>()
         };
 
-        public static readonly ReviewEntity FilmReviews = new ReviewEntity()
+        public static readonly FilmEntity InterstellarFilm = new FilmEntity()
+        {
+            Id = Guid.Parse("16d3e5e1-a52a-4fbc-ac16-305491fe0b8e"),
+            OriginalName = "Interstellar",
+            CzechName = "Intergalakticky",
+            Genre = GenreEnum.SciFi,
+            TitleFotoUrl = "gargantua.jpg",
+            Country = "USA",
+            Duration = new TimeSpan(2, 0, 0),
+            Description = "Scifi mindfuck...",
+            Reviews = new List<ReviewEntity>(),
+            Directors = new List<DirectedFilmEntity>(),
+            Actors = new List<ActedInFilmEntity>()
+        };
+
+        public static readonly ReviewEntity Review1 = new ReviewEntity()
         {
             Id = Guid.Parse("585b8ad0-aa06-49dd-94fd-8ab6c93f7e57"),
             NickName = "Alan232",
             Date = new DateTime(2013, 6, 5),
             Rating = 82,
-            TextReview = "Skvely film plny tanca a zabavy",
+            TextReview = "Skvely film plny tanca a zabavy.",
             FilmId = GreaseFilm.Id,
             Film = GreaseFilm
         };
 
-        public static readonly PersonEntity RandalKleiser = new PersonEntity()
-        {
-            Id = Guid.Parse("6d372469-af50-4cfe-9582-8789bf598b2b"),
-            FirstName = "Randal",
-            LastName = "Kleiser",
-            BirthDate = new DateTime(1972, 11, 12),
-            FotoUrl = "randalklieser.jpg",
-            DirectedFilms = new List<DirectedFilmEntity>(),
-            ActedInFilms = new List<ActedInFilmEntity>()
-        };
-
-        public static readonly ActedInFilmEntity JohnTravoltaFilm = new ActedInFilmEntity()
+        public static readonly ActedInFilmEntity JohnTravoltaFilmA = new ActedInFilmEntity()
         {
             Id = Guid.Parse("501744f2-4fc1-494b-8b84-5fecb9f7903d"),
             FilmId = GreaseFilm.Id,
@@ -65,7 +102,7 @@ namespace FilmDat.DAL.Seeds
             Actor = JohnTravolta
         };
 
-        public static readonly DirectedFilmEntity RandalKleiserFilm = new DirectedFilmEntity()
+        public static readonly DirectedFilmEntity RandalKleiserFilmD = new DirectedFilmEntity()
         {
             Id = Guid.Parse("75cb065e-643a-4b6f-807f-b3add4cf0eca"),
             FilmId = GreaseFilm.Id,
@@ -74,13 +111,36 @@ namespace FilmDat.DAL.Seeds
             Director = RandalKleiser
         };
 
+        public static readonly ActedInFilmEntity MatthewMcConaugheyFilmA = new ActedInFilmEntity()
+        {
+            Id = Guid.Parse("a81ae9bd-3a1d-4612-b27e-a6a3d5cbaf9b"),
+            FilmId = InterstellarFilm.Id,
+            ActorId = MatthewMcConaughey.Id,
+            Film = InterstellarFilm,
+            Actor = MatthewMcConaughey
+        };
+
+        public static readonly DirectedFilmEntity ChristopherNolanFilmD = new DirectedFilmEntity()
+        {
+            Id = Guid.Parse("5a4d3189-5daa-420e-9360-1146505a3d4d"),
+            FilmId = InterstellarFilm.Id,
+            DirectorId = ChristopherNolan.Id,
+            Film = InterstellarFilm,
+            Director = ChristopherNolan
+        };
+
         static Seed()
         {
-            JohnTravolta.ActedInFilms.Add(JohnTravoltaFilm);
-            GreaseFilm.Reviews.Add(FilmReviews);
-            GreaseFilm.Actors.Add(JohnTravoltaFilm);
-            GreaseFilm.Directors.Add(RandalKleiserFilm);
-            RandalKleiser.DirectedFilms.Add(RandalKleiserFilm);
+            JohnTravolta.ActedInFilms.Add(JohnTravoltaFilmA);
+            GreaseFilm.Reviews.Add(Review1);
+            GreaseFilm.Actors.Add(JohnTravoltaFilmA);
+            GreaseFilm.Directors.Add(RandalKleiserFilmD);
+            RandalKleiser.DirectedFilms.Add(RandalKleiserFilmD);
+
+            MatthewMcConaughey.ActedInFilms.Add(MatthewMcConaugheyFilmA);
+            InterstellarFilm.Actors.Add(MatthewMcConaugheyFilmA);
+            InterstellarFilm.Directors.Add(ChristopherNolanFilmD);
+            ChristopherNolan.DirectedFilms.Add(ChristopherNolanFilmD);
         }
 
         public static void SeedPerson(this ModelBuilder modelBuilder)
@@ -102,6 +162,22 @@ namespace FilmDat.DAL.Seeds
                         LastName = RandalKleiser.LastName,
                         BirthDate = RandalKleiser.BirthDate,
                         FotoUrl = RandalKleiser.FotoUrl
+                    },
+                    new PersonEntity()
+                    {
+                        Id = MatthewMcConaughey.Id,
+                        FirstName = MatthewMcConaughey.FirstName,
+                        LastName = MatthewMcConaughey.LastName,
+                        BirthDate = MatthewMcConaughey.BirthDate,
+                        FotoUrl = MatthewMcConaughey.FotoUrl
+                    },
+                    new PersonEntity()
+                    {
+                        Id = ChristopherNolan.Id,
+                        FirstName = ChristopherNolan.FirstName,
+                        LastName = ChristopherNolan.LastName,
+                        BirthDate = ChristopherNolan.BirthDate,
+                        FotoUrl = ChristopherNolan.FotoUrl
                     }
                 );
         }
@@ -109,17 +185,30 @@ namespace FilmDat.DAL.Seeds
         public static void SeedFilm(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<FilmEntity>()
-                .HasData(new FilmEntity()
-                {
-                    Id = GreaseFilm.Id,
-                    OriginalName = GreaseFilm.OriginalName,
-                    CzechName = GreaseFilm.CzechName,
-                    Genre = GreaseFilm.Genre,
-                    TitleFotoUrl = GreaseFilm.TitleFotoUrl,
-                    Country = GreaseFilm.Country,
-                    Duration = GreaseFilm.Duration,
-                    Description = GreaseFilm.Description
-                });
+                .HasData(
+                    new FilmEntity()
+                    {
+                        Id = GreaseFilm.Id,
+                        OriginalName = GreaseFilm.OriginalName,
+                        CzechName = GreaseFilm.CzechName,
+                        Genre = GreaseFilm.Genre,
+                        TitleFotoUrl = GreaseFilm.TitleFotoUrl,
+                        Country = GreaseFilm.Country,
+                        Duration = GreaseFilm.Duration,
+                        Description = GreaseFilm.Description
+                    },
+                    new FilmEntity()
+                    {
+                        Id = InterstellarFilm.Id,
+                        OriginalName = InterstellarFilm.OriginalName,
+                        CzechName = InterstellarFilm.CzechName,
+                        Genre = InterstellarFilm.Genre,
+                        TitleFotoUrl = InterstellarFilm.TitleFotoUrl,
+                        Country = InterstellarFilm.Country,
+                        Duration = InterstellarFilm.Duration,
+                        Description = InterstellarFilm.Description
+                    }
+                );
         }
 
         public static void SeedReview(this ModelBuilder modelBuilder)
@@ -127,35 +216,51 @@ namespace FilmDat.DAL.Seeds
             modelBuilder.Entity<ReviewEntity>()
                 .HasData(new ReviewEntity()
                 {
-                    Id = FilmReviews.Id,
-                    NickName = FilmReviews.NickName,
-                    Date = FilmReviews.Date,
-                    Rating = FilmReviews.Rating,
-                    TextReview = FilmReviews.TextReview,
-                    FilmId = FilmReviews.FilmId
+                    Id = Review1.Id,
+                    NickName = Review1.NickName,
+                    Date = Review1.Date,
+                    Rating = Review1.Rating,
+                    TextReview = Review1.TextReview,
+                    FilmId = Review1.FilmId
                 });
         }
 
         public static void SeedActedInFilm(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ActedInFilmEntity>()
-                .HasData(new ActedInFilmEntity()
-                {
-                    Id = JohnTravoltaFilm.Id,
-                    FilmId = JohnTravoltaFilm.FilmId,
-                    ActorId = JohnTravoltaFilm.ActorId
-                });
+                .HasData(
+                    new ActedInFilmEntity()
+                    {
+                        Id = JohnTravoltaFilmA.Id,
+                        FilmId = JohnTravoltaFilmA.FilmId,
+                        ActorId = JohnTravoltaFilmA.ActorId
+                    },
+                    new ActedInFilmEntity()
+                    {
+                        Id = MatthewMcConaugheyFilmA.Id,
+                        FilmId = MatthewMcConaugheyFilmA.FilmId,
+                        ActorId = MatthewMcConaugheyFilmA.ActorId
+                    }
+                );
         }
 
         public static void SeedDirectedFilm(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DirectedFilmEntity>()
-                .HasData(new DirectedFilmEntity()
-                {
-                    Id = RandalKleiserFilm.Id,
-                    FilmId = RandalKleiserFilm.FilmId,
-                    DirectorId = RandalKleiserFilm.DirectorId
-                });
+                .HasData(
+                    new DirectedFilmEntity()
+                    {
+                        Id = RandalKleiserFilmD.Id,
+                        FilmId = RandalKleiserFilmD.FilmId,
+                        DirectorId = RandalKleiserFilmD.DirectorId
+                    },
+                    new DirectedFilmEntity()
+                    {
+                        Id = ChristopherNolanFilmD.Id,
+                        FilmId = ChristopherNolanFilmD.FilmId,
+                        DirectorId = ChristopherNolanFilmD.DirectorId
+                    }
+                );
         }
     }
 }
