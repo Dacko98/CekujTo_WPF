@@ -4,6 +4,7 @@ using FilmDat.BL.Mapper;
 using FilmDat.BL.Models.DetailModels;
 using FilmDat.BL.Models.ListModels;
 using FilmDat.BL.Repositories;
+using FilmDat.DAL.Factories;
 using FilmDat.DAL.Seeds;
 using Xunit;
 

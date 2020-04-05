@@ -1,10 +1,7 @@
-﻿using FilmDat.DAL;
-using FilmDat.DAL.Factories;
-using FilmDat.DAL.Interfaces;
+﻿using FilmDat.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-
-namespace FilmDat.BL.Factories
+namespace FilmDat.DAL.Factories
 {
     public class DbContextFactory : IDbContextFactory
     {
@@ -12,10 +9,7 @@ namespace FilmDat.BL.Factories
         {
             var dbContextOptionsBuilder = new DbContextOptionsBuilder<FilmDatDbContext>();
             dbContextOptionsBuilder.UseSqlServer(
-                @"Data Source = (LocalDB)\MSSQLLocalDB;
-                Initial Catalog = FilmDat2;
-                MultipleActiveResultSets = True;
-                Integrated Security = True;");
+                @"Data Source = (LocalDB)\MSSQLLocalDB;Initial Catalog = FilmDat2;MultipleActiveResultSets = True;Integrated Security = True;");
             return new FilmDatDbContext(dbContextOptionsBuilder.Options);
         }
     }

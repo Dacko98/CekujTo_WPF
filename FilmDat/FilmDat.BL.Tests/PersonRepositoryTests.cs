@@ -5,6 +5,7 @@ using FilmDat.BL.Mapper;
 using FilmDat.BL.Models.DetailModels;
 using FilmDat.BL.Models.ListModels;
 using FilmDat.BL.Repositories;
+using FilmDat.DAL.Factories;
 using FilmDat.DAL.Seeds;
 using Xunit;
 
@@ -103,24 +104,11 @@ namespace FilmDat.BL.Tests
                 LastName = "testovaci",
                 BirthDate = new DateTime(1989, 12, 12),
                 FotoUrl = "foto",
-                ActedInFilms = new List<FilmListModel>()
-                /*{
-                    new ActedInFilmDetailModel()
-                    {
-                        //Id = Guid.NewGuid(),
-                        //ActorId = Guid.Parse("1aaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"),
-                        FirstName = "test",
-                        LastName = "testovaci",
-                        //FilmId = Guid.NewGuid(),
-                        OriginalName = "Rambo 5"
-                    }
-                }*/,
+                ActedInFilms = new List<FilmListModel>(),
                 DirectedFilms = new List<FilmListModel>()
             };
             person = _personRepositorySUT.InsertOrUpdate(person);
-            using var dbxAssert = _dbContextFactory.CreateDbContext();
-            var personFromDb = dbxAssert.Persons.Single(i => i.Id == person.Id);
-            var person2 = PersonMapper.MapToDetailModel(personFromDb);
+            var person2 = _personRepositorySUT.GetById(person.Id);
 
             Assert.Equal(person, person2, PersonDetailModel.PersonDetailModelComparer);
             Assert.Equal(person.ActedInFilms, person2.ActedInFilms,
@@ -135,27 +123,14 @@ namespace FilmDat.BL.Tests
             var person = new PersonDetailModel()
             {
                 Id = Seed.ChristopherNolan.Id,
-                FirstName = Seed.ChristopherNolan.FirstName,
-                LastName = Seed.ChristopherNolan.LastName,
-                BirthDate = Seed.ChristopherNolan.BirthDate,
-                FotoUrl = Seed.ChristopherNolan.FotoUrl,
-                ActedInFilms = new List<FilmListModel>(),
-                DirectedFilms = new List<FilmListModel>()
-                {
-                    new FilmListModel()
-                    {
-                        Id = Seed.ChristopherNolan.DirectedFilms.Select(i => i.Id).FirstOrDefault(),
-                        OriginalName = Seed.ChristopherNolan.DirectedFilms.Select(i => i.Film.OriginalName).FirstOrDefault()
-                    }
-                }
+                FirstName = Seed.ChristopherNolan.FirstName + "updated",
+                LastName = Seed.ChristopherNolan.LastName + "updated",
+                ActedInFilms = PersonMapper.MapToDetailModel(Seed.ChristopherNolan).ActedInFilms,
+                DirectedFilms = PersonMapper.MapToDetailModel(Seed.ChristopherNolan).DirectedFilms
             };
-            person.FirstName += "updated";
-            person.LastName += "updated";
 
             _personRepositorySUT.InsertOrUpdate(person);
-            using var dbxAssert = _dbContextFactory.CreateDbContext();
-            var personFromDb = dbxAssert.Persons.Single(i => i.Id == person.Id);
-            var person2 = PersonMapper.MapToDetailModel(personFromDb);
+            var person2 = _personRepositorySUT.GetById(person.Id);
 
             Assert.Equal(person, person2, PersonDetailModel.PersonDetailModelComparer);
             Assert.Equal(person.ActedInFilms, person2.ActedInFilms,

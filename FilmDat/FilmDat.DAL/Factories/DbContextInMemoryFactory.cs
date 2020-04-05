@@ -1,7 +1,7 @@
+﻿using FilmDat.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using FilmDat.DAL.Interfaces;
 
-namespace FilmDat.DAL.Tests
+namespace FilmDat.DAL.Factories
 {
     public class DbContextInMemoryFactory : IDbContextFactory
     {

@@ -93,6 +93,17 @@ namespace FilmDat.DAL.Seeds
             Film = GreaseFilm
         };
 
+        public static readonly ReviewEntity Review2 = new ReviewEntity()
+        {
+            Id = Guid.Parse("7d71a9ec-8633-4a42-b929-194863c2fe9d"),
+            NickName = "Branimir",
+            Date = new DateTime(2003, 8, 15),
+            Rating = 82,
+            TextReview = "John je skvely.",
+            FilmId = GreaseFilm.Id,
+            Film = GreaseFilm
+        };
+
         public static readonly ActedInFilmEntity JohnTravoltaFilmA = new ActedInFilmEntity()
         {
             Id = Guid.Parse("501744f2-4fc1-494b-8b84-5fecb9f7903d"),
@@ -133,6 +144,7 @@ namespace FilmDat.DAL.Seeds
         {
             JohnTravolta.ActedInFilms.Add(JohnTravoltaFilmA);
             GreaseFilm.Reviews.Add(Review1);
+            GreaseFilm.Reviews.Add(Review2);
             GreaseFilm.Actors.Add(JohnTravoltaFilmA);
             GreaseFilm.Directors.Add(RandalKleiserFilmD);
             RandalKleiser.DirectedFilms.Add(RandalKleiserFilmD);
@@ -214,15 +226,26 @@ namespace FilmDat.DAL.Seeds
         public static void SeedReview(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ReviewEntity>()
-                .HasData(new ReviewEntity()
-                {
-                    Id = Review1.Id,
-                    NickName = Review1.NickName,
-                    Date = Review1.Date,
-                    Rating = Review1.Rating,
-                    TextReview = Review1.TextReview,
-                    FilmId = Review1.FilmId
-                });
+                .HasData(
+                    new ReviewEntity()
+                    {
+                        Id = Review1.Id,
+                        NickName = Review1.NickName,
+                        Date = Review1.Date,
+                        Rating = Review1.Rating,
+                        TextReview = Review1.TextReview,
+                        FilmId = Review1.FilmId
+                    },
+                    new ReviewEntity()
+                    {
+                        Id = Review2.Id,
+                        NickName = Review2.NickName,
+                        Date = Review2.Date,
+                        Rating = Review2.Rating,
+                        TextReview = Review2.TextReview,
+                        FilmId = Review2.FilmId
+                    }
+                );
         }
 
         public static void SeedActedInFilm(this ModelBuilder modelBuilder)

@@ -31,17 +31,17 @@ namespace FilmDat.BL.Mapper
                     FotoUrl = entity.FotoUrl,
 
                     ActedInFilms = entity.ActedInFilms.Select(
-                        FilmEntity => new FilmListModel()
+                        actedInFilmEntity => new FilmListModel()
                         {
-                            Id = FilmEntity.Id,
-                            OriginalName = FilmEntity.Film.OriginalName
+                            Id = actedInFilmEntity.Id,
+                            OriginalName = actedInFilmEntity.Film.OriginalName
                         }).ToList(),
 
                     DirectedFilms = entity.DirectedFilms.Select(
-                        FilmEntity => new FilmListModel()
+                        directedFilmEntity => new FilmListModel()
                         {
-                            Id = FilmEntity.Id,
-                            OriginalName = FilmEntity.Film.OriginalName
+                            Id = directedFilmEntity.Id,
+                            OriginalName = directedFilmEntity.Film.OriginalName
                         }).ToList(),
                 };
 

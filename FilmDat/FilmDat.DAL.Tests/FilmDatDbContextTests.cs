@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using Xunit;
 using FilmDat.DAL.Enums;
+using FilmDat.DAL.Factories;
 
 namespace FilmDat.DAL.Tests
 {

@@ -5,7 +5,6 @@ using FilmDat.BL.Mapper;
 using FilmDat.BL.Models.DetailModels;
 using FilmDat.BL.Models.ListModels;
 using FilmDat.DAL.Entities;
-using FilmDat.DAL.Factories;
 using FilmDat.DAL.Interfaces;
 using FilmDat.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -19,12 +18,13 @@ namespace FilmDat.BL.Repositories
                 PersonMapper.MapToEntity,
                 PersonMapper.MapToListModel,
                 PersonMapper.MapToDetailModel,
-                new Func<PersonEntity, IEnumerable<IEntity>>[] { entity => entity.ActedInFilms },
+                new Func<PersonEntity, IEnumerable<IEntity>>[]
+                    {entity => entity.ActedInFilms, entity => entity.DirectedFilms},
                 entities => entities
                     .Include(entity => entity.ActedInFilms)
-                        .ThenInclude(entity => entity.Actor)
+                    .ThenInclude(entity => entity.Actor)
                     .Include(entity => entity.DirectedFilms)
-                        .ThenInclude(entity => entity.Director),
+                    .ThenInclude(entity => entity.Director),
                 null)
         {
         }

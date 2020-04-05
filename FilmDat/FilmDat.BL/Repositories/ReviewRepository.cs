@@ -3,7 +3,6 @@ using FilmDat.BL.Mapper;
 using FilmDat.BL.Models.DetailModels;
 using FilmDat.BL.Models.ListModels;
 using FilmDat.DAL.Entities;
-using FilmDat.DAL.Factories;
 using FilmDat.DAL.Interfaces;
 using FilmDat.DAL.Repositories;
 

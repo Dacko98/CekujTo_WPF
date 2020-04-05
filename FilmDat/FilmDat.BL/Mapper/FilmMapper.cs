@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using FilmDat.BL.Factories;
 using FilmDat.BL.Models.DetailModels;
 using FilmDat.BL.Models.ListModels;
@@ -35,26 +34,26 @@ namespace FilmDat.BL.Mapper
                     Description = entity.Description,
 
                     Actors = entity.Actors.Select(
-                        PersonEntity => new PersonListModel()
+                        actedInFilmEntity => new PersonListModel()
                         {
-                            Id = PersonEntity.Id,
-                            FirstName = PersonEntity.Actor.FirstName,
-                            LastName = PersonEntity.Actor.LastName
+                            Id = actedInFilmEntity.Id,
+                            FirstName = actedInFilmEntity.Actor.FirstName,
+                            LastName = actedInFilmEntity.Actor.LastName
                         }).ToList(),
 
                     Directors = entity.Directors.Select(
-                        PersonEntity => new PersonListModel()
+                        directedFilmEntity => new PersonListModel()
                         {
-                            Id = PersonEntity.Id,
-                            FirstName = PersonEntity.Director.FirstName,
-                            LastName = PersonEntity.Director.LastName
+                            Id = directedFilmEntity.Id,
+                            FirstName = directedFilmEntity.Director.FirstName,
+                            LastName = directedFilmEntity.Director.LastName
                         }).ToList(),
 
                     Reviews = entity.Reviews.Select(
-                        ReviewEntity => new ReviewListModel()
+                        reviewEntity => new ReviewListModel()
                         {
-                            Id = ReviewEntity.Id,
-                            Rating = ReviewEntity.Rating
+                            Id = reviewEntity.Id,
+                            Rating = reviewEntity.Rating
                         }).ToList()
                 };
 

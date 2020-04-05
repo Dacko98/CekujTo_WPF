@@ -77,6 +77,7 @@ namespace FilmDat.DAL.Repositories
             catch (Exception)
             {
                 dbContext.Add<TEntity>(entity);
+                SynchronizeCollections(dbContext, entity);
                 dbContext.SaveChanges();
             }
 
