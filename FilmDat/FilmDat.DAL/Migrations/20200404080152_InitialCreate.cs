@@ -20,10 +20,7 @@ namespace FilmDat.DAL.Migrations
                     Duration = table.Column<TimeSpan>(nullable: false),
                     Description = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Films", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Films", x => x.Id); });
 
             migrationBuilder.CreateTable(
                 name: "Persons",
@@ -35,10 +32,7 @@ namespace FilmDat.DAL.Migrations
                     BirthDate = table.Column<DateTime>(nullable: false),
                     FotoUrl = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Persons", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Persons", x => x.Id); });
 
             migrationBuilder.CreateTable(
                 name: "Reviews",
@@ -114,46 +108,90 @@ namespace FilmDat.DAL.Migrations
 
             migrationBuilder.InsertData(
                 table: "Films",
-                columns: new[] { "Id", "Country", "CzechName", "Description", "Duration", "Genre", "OriginalName", "TitleFotoUrl" },
+                columns: new[]
+                    {"Id", "Country", "CzechName", "Description", "Duration", "Genre", "OriginalName", "TitleFotoUrl"},
                 values: new object[,]
                 {
-                    { new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c"), "USA", "Pomada", "Romanticky muzikal", new TimeSpan(0, 2, 0, 0, 0), 7, "Grease", "pomada.jpg" },
-                    { new Guid("16d3e5e1-a52a-4fbc-ac16-305491fe0b8e"), "USA", "Intergalakticky", "Scifi mindfuck...", new TimeSpan(0, 2, 0, 0, 0), 8, "Interstellar", "gargantua.jpg" }
+                    {
+                        new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c"), "USA", "Pomada", "Romanticky muzikal",
+                        new TimeSpan(0, 2, 0, 0, 0), 7, "Grease", "pomada.jpg"
+                    },
+                    {
+                        new Guid("16d3e5e1-a52a-4fbc-ac16-305491fe0b8e"), "USA", "Intergalakticky", "Scifi mindfuck...",
+                        new TimeSpan(0, 2, 0, 0, 0), 8, "Interstellar", "gargantua.jpg"
+                    }
                 });
 
             migrationBuilder.InsertData(
                 table: "Persons",
-                columns: new[] { "Id", "BirthDate", "FirstName", "FotoUrl", "LastName" },
+                columns: new[] {"Id", "BirthDate", "FirstName", "FotoUrl", "LastName"},
                 values: new object[,]
                 {
-                    { new Guid("e1e20085-1ce4-4612-be57-285b8c76d76a"), new DateTime(1972, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "John", "johntravolta.jpg", "Travolta" },
-                    { new Guid("6d372469-af50-4cfe-9582-8789bf598b2b"), new DateTime(1972, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Randal", "randalkleiser.jpg", "Kleiser" },
-                    { new Guid("0a816848-99a5-4aae-8449-487d0847998a"), new DateTime(1979, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Matthew", "mato.jpg", "McConaughey" },
-                    { new Guid("0ae10491-658f-4fa8-860b-215ebb29cba2"), new DateTime(1970, 7, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "Christopher", "chris.jpg", "Nolan" }
+                    {
+                        new Guid("e1e20085-1ce4-4612-be57-285b8c76d76a"),
+                        new DateTime(1972, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "John", "johntravolta.jpg",
+                        "Travolta"
+                    },
+                    {
+                        new Guid("6d372469-af50-4cfe-9582-8789bf598b2b"),
+                        new DateTime(1972, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Randal", "randalkleiser.jpg",
+                        "Kleiser"
+                    },
+                    {
+                        new Guid("0a816848-99a5-4aae-8449-487d0847998a"),
+                        new DateTime(1979, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Matthew", "mato.jpg",
+                        "McConaughey"
+                    },
+                    {
+                        new Guid("0ae10491-658f-4fa8-860b-215ebb29cba2"),
+                        new DateTime(1970, 7, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "Christopher", "chris.jpg",
+                        "Nolan"
+                    }
                 });
 
             migrationBuilder.InsertData(
                 table: "ActedInFilms",
-                columns: new[] { "Id", "ActorId", "FilmId" },
+                columns: new[] {"Id", "ActorId", "FilmId"},
                 values: new object[,]
                 {
-                    { new Guid("501744f2-4fc1-494b-8b84-5fecb9f7903d"), new Guid("e1e20085-1ce4-4612-be57-285b8c76d76a"), new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c") },
-                    { new Guid("a81ae9bd-3a1d-4612-b27e-a6a3d5cbaf9b"), new Guid("0a816848-99a5-4aae-8449-487d0847998a"), new Guid("16d3e5e1-a52a-4fbc-ac16-305491fe0b8e") }
+                    {
+                        new Guid("501744f2-4fc1-494b-8b84-5fecb9f7903d"),
+                        new Guid("e1e20085-1ce4-4612-be57-285b8c76d76a"),
+                        new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c")
+                    },
+                    {
+                        new Guid("a81ae9bd-3a1d-4612-b27e-a6a3d5cbaf9b"),
+                        new Guid("0a816848-99a5-4aae-8449-487d0847998a"),
+                        new Guid("16d3e5e1-a52a-4fbc-ac16-305491fe0b8e")
+                    }
                 });
 
             migrationBuilder.InsertData(
                 table: "DirectedFilms",
-                columns: new[] { "Id", "DirectorId", "FilmId" },
+                columns: new[] {"Id", "DirectorId", "FilmId"},
                 values: new object[,]
                 {
-                    { new Guid("75cb065e-643a-4b6f-807f-b3add4cf0eca"), new Guid("6d372469-af50-4cfe-9582-8789bf598b2b"), new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c") },
-                    { new Guid("5a4d3189-5daa-420e-9360-1146505a3d4d"), new Guid("0ae10491-658f-4fa8-860b-215ebb29cba2"), new Guid("16d3e5e1-a52a-4fbc-ac16-305491fe0b8e") }
+                    {
+                        new Guid("75cb065e-643a-4b6f-807f-b3add4cf0eca"),
+                        new Guid("6d372469-af50-4cfe-9582-8789bf598b2b"),
+                        new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c")
+                    },
+                    {
+                        new Guid("5a4d3189-5daa-420e-9360-1146505a3d4d"),
+                        new Guid("0ae10491-658f-4fa8-860b-215ebb29cba2"),
+                        new Guid("16d3e5e1-a52a-4fbc-ac16-305491fe0b8e")
+                    }
                 });
 
             migrationBuilder.InsertData(
                 table: "Reviews",
-                columns: new[] { "Id", "Date", "FilmId", "NickName", "Rating", "TextReview" },
-                values: new object[] { new Guid("585b8ad0-aa06-49dd-94fd-8ab6c93f7e57"), new DateTime(2013, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c"), "Alan232", 82L, "Skvely film plny tanca a zabavy." });
+                columns: new[] {"Id", "Date", "FilmId", "NickName", "Rating", "TextReview"},
+                values: new object[]
+                {
+                    new Guid("585b8ad0-aa06-49dd-94fd-8ab6c93f7e57"),
+                    new DateTime(2013, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                    new Guid("088e40b8-63f6-4089-bfa9-4146e36e888c"), "Alan232", 82L, "Skvely film plny tanca a zabavy."
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ActedInFilms_ActorId",
@@ -163,7 +201,7 @@ namespace FilmDat.DAL.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_ActedInFilms_FilmId_ActorId",
                 table: "ActedInFilms",
-                columns: new[] { "FilmId", "ActorId" },
+                columns: new[] {"FilmId", "ActorId"},
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -174,7 +212,7 @@ namespace FilmDat.DAL.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_DirectedFilms_FilmId_DirectorId",
                 table: "DirectedFilms",
-                columns: new[] { "FilmId", "DirectorId" },
+                columns: new[] {"FilmId", "DirectorId"},
                 unique: true);
 
             migrationBuilder.CreateIndex(

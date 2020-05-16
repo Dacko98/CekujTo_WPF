@@ -98,10 +98,32 @@ namespace FilmDat.DAL.Seeds
             Id = Guid.Parse("7d71a9ec-8633-4a42-b929-194863c2fe9d"),
             NickName = "Branimir",
             Date = new DateTime(2003, 8, 15),
-            Rating = 82,
+            Rating = 69,
             TextReview = "John je skvely.",
             FilmId = GreaseFilm.Id,
             Film = GreaseFilm
+        };
+
+        public static readonly ReviewEntity Review3 = new ReviewEntity()
+        {
+            Id = Guid.Parse("0ec5146a-6564-4285-ae12-b7b5621ab852"),
+            NickName = "Jozef",
+            Date = new DateTime(1999, 8, 5),
+            Rating = 74,
+            TextReview = "To bol mindfuck.",
+            FilmId = InterstellarFilm.Id,
+            Film = InterstellarFilm
+        };
+
+        public static readonly ReviewEntity Review4 = new ReviewEntity()
+        {
+            Id = Guid.Parse("54caf507-8046-4587-a93d-9f1bf5cf1f91"),
+            NickName = "Brano",
+            Date = new DateTime(2002, 7, 15),
+            Rating = 99,
+            TextReview = "Gargantua je riadne delo.",
+            FilmId = InterstellarFilm.Id,
+            Film = InterstellarFilm
         };
 
         public static readonly ActedInFilmEntity JohnTravoltaFilmA = new ActedInFilmEntity()
@@ -150,6 +172,8 @@ namespace FilmDat.DAL.Seeds
             RandalKleiser.DirectedFilms.Add(RandalKleiserFilmD);
 
             MatthewMcConaughey.ActedInFilms.Add(MatthewMcConaugheyFilmA);
+            InterstellarFilm.Reviews.Add(Review3);
+            InterstellarFilm.Reviews.Add(Review4);
             InterstellarFilm.Actors.Add(MatthewMcConaugheyFilmA);
             InterstellarFilm.Directors.Add(ChristopherNolanFilmD);
             ChristopherNolan.DirectedFilms.Add(ChristopherNolanFilmD);
@@ -244,6 +268,24 @@ namespace FilmDat.DAL.Seeds
                         Rating = Review2.Rating,
                         TextReview = Review2.TextReview,
                         FilmId = Review2.FilmId
+                    },
+                    new ReviewEntity()
+                    {
+                        Id = Review3.Id,
+                        NickName = Review3.NickName,
+                        Date = Review3.Date,
+                        Rating = Review3.Rating,
+                        TextReview = Review3.TextReview,
+                        FilmId = Review3.FilmId
+                    },
+                    new ReviewEntity()
+                    {
+                        Id = Review4.Id,
+                        NickName = Review4.NickName,
+                        Date = Review4.Date,
+                        Rating = Review4.Rating,
+                        TextReview = Review4.TextReview,
+                        FilmId = Review4.FilmId
                     }
                 );
         }

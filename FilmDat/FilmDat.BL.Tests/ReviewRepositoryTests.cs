@@ -44,7 +44,7 @@ namespace FilmDat.BL.Tests
         {
             var review = _reviewRepositorySUT.GetAll().Single(i => i.Id == Seed.Review1.Id);
 
-            Assert.Equal(ReviewMapper.MapToListModel(Seed.Review1), review, ReviewListModel.IdRatingTextReviewComparer);
+            Assert.Equal(ReviewMapper.MapToListModel(Seed.Review1), review, ReviewListModel.ReviewListModelComparer);
         }
 
         [Fact]

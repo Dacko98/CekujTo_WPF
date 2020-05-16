@@ -31,7 +31,7 @@ namespace FilmDat.BL.Tests
         {
             var model = new FilmDetailModel()
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.Empty,
                 OriginalName = "The Avengers",
                 Country = "USA",
                 CzechName = "Avengers",
@@ -39,8 +39,8 @@ namespace FilmDat.BL.Tests
                 Genre = GenreEnum.SciFi,
                 TitleFotoUrl = "avangers",
                 Reviews = new List<ReviewListModel>(),
-                Actors = new List<PersonListModel>(),
-                Directors = new List<PersonListModel>()
+                Actors = new List<ActedInFilmDetailModel>(),
+                Directors = new List<DirectedFilmDetailModel>()
             };
             var returnedModel = _filmRepositorySUT.InsertOrUpdate(model);
             Assert.NotNull(returnedModel);
@@ -53,9 +53,9 @@ namespace FilmDat.BL.Tests
             var film = FilmMapper.MapToDetailModel(Seed.GreaseFilm);
 
             Assert.Equal(film, film2, FilmDetailModel.FilmDetailModelComparer);
-            Assert.Equal(film.Reviews, film2.Reviews, ReviewListModel.IdRatingTextReviewComparer);
-            Assert.Equal(film.Actors, film2.Actors, PersonListModel.IdFirstNameLastNameComparer);
-            Assert.Equal(film.Directors, film2.Directors, PersonListModel.IdFirstNameLastNameComparer);
+            Assert.Equal(film.Reviews, film2.Reviews, ReviewListModel.ReviewListModelComparer);
+            Assert.Equal(film.Actors, film2.Actors, ActedInFilmDetailModel.ActedInFilmDetailModelComparer);
+            Assert.Equal(film.Directors, film2.Directors, DirectedFilmDetailModel.DirectedFilmDetailModelComparer);
         }
 
         [Fact]
@@ -71,7 +71,7 @@ namespace FilmDat.BL.Tests
         {
             var film = new FilmDetailModel()
             {
-                Id = Guid.Parse("aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"),
+                Id = Guid.Empty,
                 OriginalName = "A",
                 Genre = GenreEnum.Action,
                 CzechName = "B",
@@ -79,8 +79,8 @@ namespace FilmDat.BL.Tests
                 Description = "A film!",
                 Country = "Murica",
                 Reviews = new List<ReviewListModel>(),
-                Actors = new List<PersonListModel>(),
-                Directors = new List<PersonListModel>()
+                Actors = new List<ActedInFilmDetailModel>(),
+                Directors = new List<DirectedFilmDetailModel>()
             };
 
             using var dbxAssert = _dbContextFactory.CreateDbContext();
@@ -91,9 +91,9 @@ namespace FilmDat.BL.Tests
             var film2 = FilmMapper.MapToDetailModel(filmFromDb);
 
             Assert.Equal(film, film2, FilmDetailModel.FilmDetailModelComparer);
-            Assert.Equal(film.Reviews, film2.Reviews, ReviewListModel.IdRatingTextReviewComparer);
-            Assert.Equal(film.Actors, film2.Actors, PersonListModel.IdFirstNameLastNameComparer);
-            Assert.Equal(film.Directors, film2.Directors, PersonListModel.IdFirstNameLastNameComparer);
+            Assert.Equal(film.Reviews, film2.Reviews, ReviewListModel.ReviewListModelComparer);
+            Assert.Equal(film.Actors, film2.Actors, ActedInFilmDetailModel.ActedInFilmDetailModelComparer);
+            Assert.Equal(film.Directors, film2.Directors, DirectedFilmDetailModel.DirectedFilmDetailModelComparer);
         }
 
         [Fact]
@@ -102,28 +102,16 @@ namespace FilmDat.BL.Tests
             var film = new FilmDetailModel()
             {
                 Id = Seed.InterstellarFilm.Id,
-                OriginalName = Seed.InterstellarFilm.OriginalName,
-                Genre = Seed.InterstellarFilm.Genre,
-                CzechName = Seed.InterstellarFilm.CzechName,
-                TitleFotoUrl = Seed.InterstellarFilm.TitleFotoUrl,
-                Description = Seed.InterstellarFilm.Description,
-                Duration = Seed.InterstellarFilm.Duration,
-                Country = Seed.InterstellarFilm.Country,
-                Reviews = new List<ReviewListModel>(),
-                Actors = new List<PersonListModel>(),
-                Directors = new List<PersonListModel>()
+                OriginalName = Seed.InterstellarFilm.OriginalName + "updated",
             };
-            film.OriginalName += "updated";
             film = _filmRepositorySUT.InsertOrUpdate(film);
 
-            using var dbxAssert = _dbContextFactory.CreateDbContext();
-            var filmFromDb = dbxAssert.Films.Single(i => i.Id == film.Id);
-            var film2 = FilmMapper.MapToDetailModel(filmFromDb);
+            var film2 = _filmRepositorySUT.GetById(film.Id);
 
             Assert.Equal(film, film2, FilmDetailModel.FilmDetailModelComparer);
-            Assert.Equal(film.Reviews, film2.Reviews, ReviewListModel.IdRatingTextReviewComparer);
-            Assert.Equal(film.Actors, film2.Actors, PersonListModel.IdFirstNameLastNameComparer);
-            Assert.Equal(film.Directors, film2.Directors, PersonListModel.IdFirstNameLastNameComparer);
+            Assert.Equal(film.Reviews, film2.Reviews, ReviewListModel.ReviewListModelComparer);
+            Assert.Equal(film.Actors, film2.Actors, ActedInFilmDetailModel.ActedInFilmDetailModelComparer);
+            Assert.Equal(film.Directors, film2.Directors, DirectedFilmDetailModel.DirectedFilmDetailModelComparer);
         }
 
         [Fact]

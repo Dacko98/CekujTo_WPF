@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using FilmDat.BL.Factories;
 using FilmDat.BL.Models.DetailModels;
 using FilmDat.BL.Models.ListModels;
@@ -34,32 +36,42 @@ namespace FilmDat.BL.Mapper
                     Description = entity.Description,
 
                     Actors = entity.Actors.Select(
-                        actedInFilmEntity => new PersonListModel()
+                        actedInFilmEntity => new ActedInFilmDetailModel()
                         {
                             Id = actedInFilmEntity.Id,
+                            ActorId = actedInFilmEntity.ActorId,
                             FirstName = actedInFilmEntity.Actor.FirstName,
-                            LastName = actedInFilmEntity.Actor.LastName
+                            LastName = actedInFilmEntity.Actor.LastName,
+                            FilmId = entity.Id,
+                            OriginalName = entity.OriginalName
                         }).ToList(),
 
                     Directors = entity.Directors.Select(
-                        directedFilmEntity => new PersonListModel()
+                        directedFilmEntity => new DirectedFilmDetailModel()
                         {
                             Id = directedFilmEntity.Id,
+                            DirectorId = directedFilmEntity.DirectorId,
                             FirstName = directedFilmEntity.Director.FirstName,
-                            LastName = directedFilmEntity.Director.LastName
+                            LastName = directedFilmEntity.Director.LastName,
+                            FilmId = entity.Id,
+                            OriginalName = entity.OriginalName
                         }).ToList(),
 
                     Reviews = entity.Reviews.Select(
                         reviewEntity => new ReviewListModel()
                         {
                             Id = reviewEntity.Id,
-                            Rating = reviewEntity.Rating
-                        }).ToList()
+                            Rating = reviewEntity.Rating,
+                            TextReview = reviewEntity.TextReview,
+                            FilmId = entity.Id
+                        }).ToList(),
+
+                    AvgRating = ""
                 };
 
         public static FilmEntity MapToEntity(FilmDetailModel detailModel, IEntityFactory entityFactory)
         {
-            var entity = (entityFactory ??= new CreateNewEntityFactory()).Create<FilmEntity>(detailModel.Id);
+            var entity = (entityFactory ??= new EntityFactory()).Create<FilmEntity>(detailModel.Id);
 
             entity.Id = detailModel.Id;
             entity.OriginalName = detailModel.OriginalName;
@@ -70,12 +82,17 @@ namespace FilmDat.BL.Mapper
             entity.Duration = detailModel.Duration;
             entity.Description = detailModel.Description;
 
-            entity.Reviews = detailModel.Reviews
-                .Select(model => ReviewMapper.MapToEntity(model, entityFactory)).ToList();
-            entity.Actors = detailModel.Actors
-                .Select(model => ActedInFilmMapper.MapToEntity(model, entityFactory)).ToList();
-            entity.Directors = detailModel.Directors
-                .Select(model => DirectedFilmMapper.MapToEntity(model, entityFactory)).ToList();
+            if (detailModel.Reviews != null)
+                entity.Reviews = detailModel.Reviews
+                    .Select(model => ReviewMapper.MapToEntity(model, entityFactory)).ToList();
+
+            if (detailModel.Actors != null)
+                entity.Actors = detailModel.Actors
+                    .Select(model => ActedInFilmMapper.MapToEntity(model, entityFactory)).ToList();
+
+            if (detailModel.Directors != null)
+                entity.Directors = detailModel.Directors
+                    .Select(model => DirectedFilmMapper.MapToEntity(model, entityFactory)).ToList();
 
             return entity;
         }

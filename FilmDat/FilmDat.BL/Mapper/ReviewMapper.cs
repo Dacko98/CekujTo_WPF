@@ -14,7 +14,9 @@ namespace FilmDat.BL.Mapper
                 : new ReviewListModel()
                 {
                     Id = entity.Id,
-                    Rating = entity.Rating
+                    Rating = entity.Rating,
+                    TextReview = entity.TextReview,
+                    FilmId = entity.FilmId
                 };
 
         public static ReviewDetailModel MapToDetailModel(ReviewEntity entity) =>
@@ -27,26 +29,31 @@ namespace FilmDat.BL.Mapper
                     Date = entity.Date,
                     Rating = entity.Rating,
                     TextReview = entity.TextReview,
+                    FilmId = entity.FilmId
                 };
 
         public static ReviewEntity MapToEntity(ReviewDetailModel detailModel, IEntityFactory entityFactory)
         {
-            var entity = (entityFactory ??= new CreateNewEntityFactory()).Create<ReviewEntity>(detailModel.Id);
+            var entity = (entityFactory ??= new EntityFactory()).Create<ReviewEntity>(detailModel.Id);
 
             entity.Id = detailModel.Id;
             entity.Date = detailModel.Date;
             entity.Rating = detailModel.Rating;
             entity.TextReview = detailModel.TextReview;
             entity.NickName = detailModel.NickName;
+            entity.FilmId = detailModel.FilmId;
 
             return entity;
         }
 
         public static ReviewEntity MapToEntity(ReviewListModel model, IEntityFactory entityFactory)
         {
-            var entity = (entityFactory ??= new CreateNewEntityFactory()).Create<ReviewEntity>(model.Id);
+            var entity = (entityFactory ??= new EntityFactory()).Create<ReviewEntity>(model.Id);
 
             entity.Id = model.Id;
+            entity.Rating = model.Rating;
+            entity.TextReview = model.TextReview;
+            entity.FilmId = model.FilmId;
 
             return entity;
         }

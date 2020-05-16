@@ -22,9 +22,9 @@ namespace FilmDat.BL.Repositories
                     {entity => entity.ActedInFilms, entity => entity.DirectedFilms},
                 entities => entities
                     .Include(entity => entity.ActedInFilms)
-                    .ThenInclude(entity => entity.Actor)
+                    .ThenInclude(entity => entity.Film)
                     .Include(entity => entity.DirectedFilms)
-                    .ThenInclude(entity => entity.Director),
+                    .ThenInclude(entity => entity.Film),
                 null)
         {
         }

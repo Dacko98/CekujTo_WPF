@@ -70,16 +70,7 @@ namespace FilmDat.DAL.Repositories
 #if DEBUG
             DisplayStates(dbContext.ChangeTracker.Entries());
 #endif
-            try
-            {
-                dbContext.SaveChanges();
-            }
-            catch (Exception)
-            {
-                dbContext.Add<TEntity>(entity);
-                SynchronizeCollections(dbContext, entity);
-                dbContext.SaveChanges();
-            }
+            dbContext.SaveChanges();
 
             return MapDetailModel(entity);
         }
@@ -124,7 +115,6 @@ namespace FilmDat.DAL.Repositories
                 return;
             }
 
-            IQueryable<TEntity> query = dbContext.Set<TEntity>();
             TEntity entityInDb;
             using (var dbContextGetById = DbContextFactory.CreateDbContext())
             {

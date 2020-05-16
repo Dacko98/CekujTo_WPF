@@ -1,8 +1,11 @@
 # Project ICS 2019/2020 team 0007
+
 ### URL: https://github.com/nesfit/ICS/tree/master/Project
+
 ### Authors:
-* René Bolf <xbolfr00@stud.fit.vutbr.cz>
-* Radoslav Greneík <xgrenc00@stud.fit.vutbr.cz>
-* aneta Grossová <xgross11@stud.fit.vutbr.cz>
-* Daniel Jacko <xjacko04@stud.fit.vutbr.cz>
-* Barbora Nemeeková <xnemce06@stud.fit.vutbr.cz>
+
+-   RenÃ© Bolf <xbolfr00@stud.fit.vutbr.cz>
+-   Radoslav GrenÄÃ­k <xgrenc00@stud.fit.vutbr.cz>
+-   Å½aneta GrossovÃ¡ <xgross11@stud.fit.vutbr.cz>
+-   Daniel Jacko <xjacko04@stud.fit.vutbr.cz>
+-   Barbora NemÄekovÃ¡ <xnemce06@stud.fit.vutbr.cz>
